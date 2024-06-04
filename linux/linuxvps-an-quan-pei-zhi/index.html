@@ -417,9 +417,18 @@
 <p>拿到一台vps后如果我们不做任何配置的话很快我们就会发现自己的vps多了大量的ssh爆破记录，因此为了让自己的vps稍微安全一点，就要对ssh的配置做一点点改动</p>
 </blockquote>
 <h2 id="创建普通用户"><a href="#创建普通用户" class="headerlink" title="创建普通用户"></a>创建普通用户</h2><p>一般情况新入手的vps分配的用户都是root用户，而系统中全部程序使用root运行的话相对来说不是很安全，因此我们需要新建一个普通用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建用户</span></span><br><span class="line">adduser example</span><br><span class="line"><span class="comment">#将用户加入sudoer</span></span><br><span class="line">adduser username sudo</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#创建用户</span>
+adduser example
+<span class="token comment">#将用户加入sudoer</span>
+adduser username <span class="token function">sudo</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>加入sudo组还可以通过直接修改文件的方式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加可写权限</span></span><br><span class="line"><span class="built_in">chmod</span> u+w /etc/sudoers</span><br><span class="line">vim /etc/sudoers</span><br><span class="line"><span class="comment">#找到root ALL = (ALL) ALL这一行，在下一行加入</span></span><br><span class="line">username ALL = (ALL) ALL</span><br><span class="line"><span class="comment">#最后还原文件权限</span></span><br><span class="line"><span class="built_in">chmod</span> u-w /etc/sudoers</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加可写权限</span>
+<span class="token function">chmod</span> u+w /etc/sudoers
+<span class="token function">vim</span> /etc/sudoers
+<span class="token comment">#找到root ALL = (ALL) ALL这一行，在下一行加入</span>
+username ALL <span class="token operator">=</span> <span class="token punctuation">(</span>ALL<span class="token punctuation">)</span> ALL
+<span class="token comment">#最后还原文件权限</span>
+<span class="token function">chmod</span> u-w /etc/sudoers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这里插入一个小知识点。</p>
 <ul>
@@ -429,18 +438,41 @@
 </li>
 </ul>
 <h2 id="SSH安全设置"><a href="#SSH安全设置" class="headerlink" title="SSH安全设置"></a>SSH安全设置</h2><h3 id="SSH设置禁止ROOT登录"><a href="#SSH设置禁止ROOT登录" class="headerlink" title="SSH设置禁止ROOT登录"></a>SSH设置禁止ROOT登录</h3><p>1.修改SSH配置文件，将下面一行的注释取消并修改yes为no</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">编辑ssh配置文件</span></span><br><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line">-------------------------</span><br><span class="line">PermitRootLogin no</span><br></pre></td></tr></table></figure>
-<h3 id="更改默认端口"><a href="#更改默认端口" class="headerlink" title="更改默认端口"></a>更改默认端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line">-------------------------</span><br><span class="line"><span class="comment">#Port 22</span></span><br><span class="line">Port 29888</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-console" data-language="console"><code class="language-console">#编辑ssh配置文件
+vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config
+-------------------------
+PermitRootLogin no<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="更改默认端口"><a href="#更改默认端口" class="headerlink" title="更改默认端口"></a>更改默认端口</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/ssh/sshd_config
+-------------------------
+<span class="token comment">#Port 22</span>
+Port <span class="token number">29888</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="更改密钥登录"><a href="#更改密钥登录" class="headerlink" title="更改密钥登录"></a>更改密钥登录</h3><p>1.生成密钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-t</span> rsa<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>2.传输密钥到服务器<br>可以在本机使用一键完成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id user@serverip</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-copy-id user@serverip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>也可以手动完成配置，在本机上执行此命令，上传公钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> .ssh</span><br><span class="line">scp -P id_rsa.pub user@serverip:/tmp</span><br><span class="line"><span class="comment">#在服务器上执行此命令，追加到authorized_keys</span></span><br><span class="line"><span class="built_in">cd</span> /tmp &amp;&amp; <span class="built_in">cat</span> id_rsa.pub &gt;&gt;s ~/.ssh/authorized_keys</span><br><span class="line"><span class="comment">#更改权限</span></span><br><span class="line"><span class="built_in">chmod</span> 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> .ssh
+<span class="token function">scp</span> <span class="token parameter variable">-P</span> id_rsa.pub user@serverip:/tmp
+<span class="token comment">#在服务器上执行此命令，追加到authorized_keys</span>
+<span class="token builtin class-name">cd</span> /tmp <span class="token operator">&amp;&amp;</span> <span class="token function">cat</span> id_rsa.pub <span class="token operator">>></span>s ~/.ssh/authorized_keys
+<span class="token comment">#更改权限</span>
+<span class="token function">chmod</span> <span class="token number">600</span> ~/.ssh/authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="3">
-<li>配置sshd开启密钥登录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/ssh/sshd_config</span></span><br><span class="line"><span class="comment">#RSA认证</span></span><br><span class="line">RSAAuthentication <span class="built_in">yes</span> </span><br><span class="line"><span class="comment">#开启公钥验证</span></span><br><span class="line">PubkeyAuthentication <span class="built_in">yes</span></span><br><span class="line"><span class="comment">#验证文件路径</span></span><br><span class="line">AuthorizedKeysFile .ssh/authorized_keys </span><br><span class="line"><span class="comment">#禁止密码认证</span></span><br><span class="line">PasswordAuthentication no </span><br><span class="line"><span class="comment">#禁止空密码</span></span><br><span class="line">PermitEmptyPasswords no </span><br><span class="line"><span class="comment"># 最后保存，重启sshd服务</span></span><br><span class="line">sudo service sshd restart</span><br></pre></td></tr></table></figure></li>
+<li>配置sshd开启密钥登录<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># vi /etc/ssh/sshd_config</span>
+<span class="token comment">#RSA认证</span>
+RSAAuthentication <span class="token function">yes</span> 
+<span class="token comment">#开启公钥验证</span>
+PubkeyAuthentication <span class="token function">yes</span>
+<span class="token comment">#验证文件路径</span>
+AuthorizedKeysFile .ssh/authorized_keys 
+<span class="token comment">#禁止密码认证</span>
+PasswordAuthentication no 
+<span class="token comment">#禁止空密码</span>
+PermitEmptyPasswords no 
+<span class="token comment"># 最后保存，重启sshd服务</span>
+<span class="token function">sudo</span> <span class="token function">service</span> sshd restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 
                 
@@ -900,13 +932,9 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
 
 
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:admin@secgxx.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -915,10 +943,6 @@
 
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 

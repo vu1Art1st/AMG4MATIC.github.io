@@ -766,7 +766,7 @@
 </ul>
 <h5 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h5><p>作为最普通的密码攻击手段，ARCHPR允许在范围选项卡中，选择暴力破解的字符集：</p>
 <p>其中”所有特殊符号”为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!@<span class="comment">#$%^&amp;*()_+-=&lt;&gt;,./?[]&#123;&#125;~:;`&#x27;|&quot;\</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">!</span>@<span class="token comment">#$%^&amp;*()_+-=&lt;>,./?[]&#123;&#125;~:;`'|"\</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>此外，可以自定义字符集：通过勾选用户定义，然后点击右边的”自定义字符集”选项</p>
 <p>如你所见，在给定的字符集中，只囊括了ASCII可打印字符，如果 .zip 的密码是中文的话，那就必须选择”自定义字符集”，并且勾选转换为OEM编码；否则密码会”Not Found”</p>
@@ -784,7 +784,7 @@
 <li>数字 0 - 9</li>
 <li>特殊字符 !@#$ …<br>也就是说，暴力破解密码的顺序大致为：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;AAA&quot;</span> -&gt; <span class="string">&quot;AAB&quot;</span> -&gt; <span class="string">&quot;AAC&quot;</span> -&gt; ... -&gt; <span class="string">&quot;AAZ&quot;</span> -&gt; <span class="string">&quot;AA &quot;</span> -&gt; <span class="string">&quot;AAa&quot;</span> -&gt; <span class="string">&quot;AAb&quot;</span> -&gt; ... -&gt; <span class="string">&quot;AAz&quot;</span> -&gt; <span class="string">&quot;AA0&quot;</span> -&gt; <span class="string">&quot;AA1&quot;</span> -&gt; ... -&gt; <span class="string">&quot;AA9&quot;</span> -&gt; <span class="string">&quot;AA!&quot;</span> -&gt; <span class="string">&quot;AA@&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token string">"AAA"</span> -<span class="token operator">></span> <span class="token string">"AAB"</span> -<span class="token operator">></span> <span class="token string">"AAC"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AAZ"</span> -<span class="token operator">></span> <span class="token string">"AA "</span> -<span class="token operator">></span> <span class="token string">"AAa"</span> -<span class="token operator">></span> <span class="token string">"AAb"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AAz"</span> -<span class="token operator">></span> <span class="token string">"AA0"</span> -<span class="token operator">></span> <span class="token string">"AA1"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AA9"</span> -<span class="token operator">></span> <span class="token string">"AA!"</span> -<span class="token operator">></span> <span class="token string">"AA@"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>上图的”开始于”有2个作用：</p>
 <p>当你知道密码长度为5，并且第一个字符为 k，你可以在”开始于”设置<code>kAAAA</code>，那么ARCHPR将跳过<code>AAAAA</code>到<code>kAAAA</code>的前一个的暴力破解，节省时间<br>如果破解密码的时间太长，ARCHPR会每隔5分钟自动保存密码（在自动保存选项卡中可以选择），如果某次暴力破解被迫中断，那么可以通过查看最后一次保存的密码，并设置”开始于”，直接从上次爆破的地方继续开始爆破<br>“结束于”的作用类似</p>
@@ -835,10 +835,65 @@
 <p>我们不去爆破压缩包的密码，而是直接去爆破源文件的内容(一般都是可见的字符串)，从而获取想要的信息。</p>
 <p>比如我们新建一个 <code>flag.txt</code>，其中内容为 <code>123</code>，使用密码 <code>!QAZXSW@#EDCVFR$</code> 去加密。</p>
 <p>!!! note<br>​    在爆破时我们所枚举的所有可能字符串的 <code>CRC32</code> 值是要与压缩源文件数据区中的 <code>CRC32</code> 值所对应</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">alph = <span class="string">&#x27;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=&#x27;</span></span><br><span class="line"></span><br><span class="line">crcdict = &#123;&#125;</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;computing all possible CRCs...&quot;</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> itertools.product(<span class="built_in">list</span>(alph), repeat=<span class="number">4</span>):</span><br><span class="line">    st = <span class="string">&#x27;&#x27;</span>.join(x)</span><br><span class="line">    testcrc = binascii.crc32(st)</span><br><span class="line">    crcdict[struct.pack(<span class="string">&#x27;&lt;i&#x27;</span>, testcrc)] = st</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Done!&quot;</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;flag.zip&#x27;</span>)</span><br><span class="line">data = f.read()</span><br><span class="line">f.close()</span><br><span class="line">crc = <span class="string">&#x27;&#x27;</span>.join(data[<span class="number">14</span>:<span class="number">18</span>])</span><br><span class="line"><span class="keyword">if</span> crc <span class="keyword">in</span> crcdict:</span><br><span class="line">    <span class="built_in">print</span> crcdict[crc]</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;FAILED!&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+
+<span class="token keyword">import</span> binascii
+<span class="token keyword">import</span> base64
+<span class="token keyword">import</span> string
+<span class="token keyword">import</span> itertools
+<span class="token keyword">import</span> struct
+
+alph <span class="token operator">=</span> <span class="token string">'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/='</span>
+
+crcdict <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">print</span> <span class="token string">"computing all possible CRCs..."</span>
+<span class="token keyword">for</span> x <span class="token keyword">in</span> itertools<span class="token punctuation">.</span>product<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>alph<span class="token punctuation">)</span><span class="token punctuation">,</span> repeat<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    st <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+    testcrc <span class="token operator">=</span> binascii<span class="token punctuation">.</span>crc32<span class="token punctuation">(</span>st<span class="token punctuation">)</span>
+    crcdict<span class="token punctuation">[</span>struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'&lt;i'</span><span class="token punctuation">,</span> testcrc<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> st
+<span class="token keyword">print</span> <span class="token string">"Done!"</span>
+
+f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'flag.zip'</span><span class="token punctuation">)</span>
+data <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+crc <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">14</span><span class="token punctuation">:</span><span class="token number">18</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">if</span> crc <span class="token keyword">in</span> crcdict<span class="token punctuation">:</span>
+    <span class="token keyword">print</span> crcdict<span class="token punctuation">[</span>crc<span class="token punctuation">]</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span> <span class="token string">"FAILED!"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h5 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h5><p>根据每个压缩包内的文件大小可以推断使用 <code>CRC32</code> 攻击手法，获得每个压缩包内的内容后连在一起 <code>Base64</code> 解码后是一个加密的压缩包，爆破获得 <code>flag</code>。<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210905195800.png" alt="20210905195800"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CrackCrc</span>(<span class="params">crc</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">for</span> q <span class="keyword">in</span> dic:</span><br><span class="line">                    s = i + j + p + q</span><br><span class="line">                    <span class="keyword">if</span> crc == (binascii.crc32(s) &amp; <span class="number">0xffffffff</span>):</span><br><span class="line">                        <span class="comment">#print s</span></span><br><span class="line">                        f.write(s)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">CrackZip</span>():</span><br><span class="line">    <span class="keyword">for</span> I <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">6</span>):</span><br><span class="line">        file = <span class="string">&#x27;flag&#x27;</span> + <span class="built_in">str</span>(I)+ <span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">        f = zipfile.ZipFile(file, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">        GetCrc = f.getinfo(<span class="string">&#x27;flag&#x27;</span>+<span class="built_in">str</span>(I)+<span class="string">&#x27;.txt&#x27;</span>)</span><br><span class="line">        crc = GetCrc.CRC</span><br><span class="line">        <span class="comment">#以上3行为获取压缩包CRC32值的步骤</span></span><br><span class="line">        <span class="built_in">print</span> <span class="built_in">hex</span>(crc)</span><br><span class="line">        CrackCrc(crc)</span><br><span class="line"></span><br><span class="line">dic = string.ascii_letters + string.digits + <span class="string">&#x27;&#123;&#125;_+/=&#x27;</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;out.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">CrackZip()</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#coding:utf-8</span>
+<span class="token keyword">import</span> zipfile
+<span class="token keyword">import</span> string
+<span class="token keyword">import</span> binascii
+
+<span class="token keyword">def</span> <span class="token function">CrackCrc</span><span class="token punctuation">(</span>crc<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> dic<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> dic<span class="token punctuation">:</span>
+            <span class="token keyword">for</span> p <span class="token keyword">in</span> dic<span class="token punctuation">:</span>
+                <span class="token keyword">for</span> q <span class="token keyword">in</span> dic<span class="token punctuation">:</span>
+                    s <span class="token operator">=</span> i <span class="token operator">+</span> j <span class="token operator">+</span> p <span class="token operator">+</span> q
+                    <span class="token keyword">if</span> crc <span class="token operator">==</span> <span class="token punctuation">(</span>binascii<span class="token punctuation">.</span>crc32<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xffffffff</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token comment">#print s</span>
+                        f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+                        <span class="token keyword">return</span>
+
+<span class="token keyword">def</span> <span class="token function">CrackZip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> I <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">file</span> <span class="token operator">=</span> <span class="token string">'flag'</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token operator">+</span> <span class="token string">'.zip'</span>
+        f <span class="token operator">=</span> zipfile<span class="token punctuation">.</span>ZipFile<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span>
+        GetCrc <span class="token operator">=</span> f<span class="token punctuation">.</span>getinfo<span class="token punctuation">(</span><span class="token string">'flag'</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>I<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'.txt'</span><span class="token punctuation">)</span>
+        crc <span class="token operator">=</span> GetCrc<span class="token punctuation">.</span>CRC
+        <span class="token comment">#以上3行为获取压缩包CRC32值的步骤</span>
+        <span class="token keyword">print</span> <span class="token builtin">hex</span><span class="token punctuation">(</span>crc<span class="token punctuation">)</span>
+        CrackCrc<span class="token punctuation">(</span>crc<span class="token punctuation">)</span>
+
+dic <span class="token operator">=</span> string<span class="token punctuation">.</span>ascii_letters <span class="token operator">+</span> string<span class="token punctuation">.</span>digits <span class="token operator">+</span> <span class="token string">'&#123;&#125;_+/='</span>
+
+f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'out.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span>
+CrackZip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210905201011.png" alt="20210905201011"></p>
 <h4 id="明文攻击"><a href="#明文攻击" class="headerlink" title="明文攻击"></a>明文攻击</h4><h5 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h5><ul>
 <li><p>.zip 传统加密算法本质上是<code>伪随机数流</code>和<code>明文</code>进行异或，产生这个伪随机流需要用到3个32 bits的key；<code>找到这3个key，就能解开加密的文件</code></p>
@@ -889,7 +944,20 @@
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210906111208.png" alt="20210906111208"><br>我们将 <code>Desktop_decrypted.zip</code> 解压出来，查看 <code>answer</code> 目录下的 <code>key.txt</code> 即可。</p>
 <p>所以最终的flag为：**<code>flag&#123;7ip_Fi13_S0m3tim3s_s0_3a5y@&#125;</code>**</p>
 <h4 id="伪加密"><a href="#伪加密" class="headerlink" title="伪加密"></a>伪加密</h4><h5 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h5><p>在上文 <code>ZIP</code> 格式中的 <strong>核心目录区</strong> 中，我们强调了一个叫做通用位标记 <code>(General purpose bit flag)</code> 的 <code>2</code> 字节，不同比特位有着不同的含义。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Bit 0: If set, indicates that the file is encrypted.</span><br><span class="line"></span><br><span class="line">(For Method 6 - Imploding)</span><br><span class="line">Bit 1: If the compression method used was type 6,</span><br><span class="line">     Imploding, then this bit, if set, indicates</span><br><span class="line">     an 8K sliding dictionary was used.  If clear,</span><br><span class="line">     then a 4K sliding dictionary was used.</span><br><span class="line">...</span><br><span class="line">Bit 6: Strong encryption.  If this bit is set, you should</span><br><span class="line">     set the version needed to extract value to at least</span><br><span class="line">     50 and you must also set bit 0.  If AES encryption</span><br><span class="line">     is used, the version needed to extract value must</span><br><span class="line">     be at least 51.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Bit <span class="token number">0</span>: If set, indicates that the <span class="token function">file</span> is encrypted.
+
+<span class="token punctuation">(</span>For Method <span class="token number">6</span> - Imploding<span class="token punctuation">)</span>
+Bit <span class="token number">1</span>: If the compression method used was <span class="token builtin class-name">type</span> <span class="token number">6</span>,
+     Imploding, <span class="token keyword">then</span> this bit, <span class="token keyword">if</span> set, indicates
+     an 8K sliding dictionary was used.  If clear,
+     <span class="token keyword">then</span> a 4K sliding dictionary was used.
+<span class="token punctuation">..</span>.
+Bit <span class="token number">6</span>: Strong encryption.  If this bit is set, you should
+     <span class="token builtin class-name">set</span> the version needed to extract value to at least
+     <span class="token number">50</span> and you must also <span class="token builtin class-name">set</span> bit <span class="token number">0</span>.  If AES encryption
+     is used, the version needed to extract value must
+     be at least <span class="token number">51</span>.
+<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>修改伪加密的方法：</p>
 <ul>
@@ -1075,7 +1143,7 @@
 <h3 id="主要攻击-1"><a href="#主要攻击-1" class="headerlink" title="主要攻击"></a>主要攻击</h3><h4 id="伪加密-1"><a href="#伪加密-1" class="headerlink" title="伪加密"></a>伪加密</h4><p>RAR 文件的伪加密在文件头中的位标记字段上，用 010 Editor 可以很清楚的看见这一位，修改这一位可以造成伪加密。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/6.png" alt="6"></p>
 <p>其余明文攻击等手法依旧同 ZIP 中介绍的一样。</p>
-<h2 id="7z"><a href="#7z" class="headerlink" title="7z"></a>7z</h2><h3 id="7z文件头"><a href="#7z文件头" class="headerlink" title="7z文件头"></a>7z文件头</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">37 7A BC AF 27 1C</span><br></pre></td></tr></table></figure>
+<h2 id="7z"><a href="#7z" class="headerlink" title="7z"></a>7z</h2><h3 id="7z文件头"><a href="#7z文件头" class="headerlink" title="7z文件头"></a>7z文件头</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">37</span> 7A BC AF <span class="token number">27</span> 1C<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.2.0.txt">https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.2.0.txt</a></li>
@@ -1543,13 +1611,9 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
 
 
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:admin@secgxx.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1558,10 +1622,6 @@
 
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 

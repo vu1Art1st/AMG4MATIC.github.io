@@ -429,16 +429,24 @@ Windows下安装Python3时默认安装pip，将Python安装目录下的scripts�
 </ul>
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>1.下载安装执行脚本<br><code> curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</code><br>或者<br><code>wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate</code></p>
 <p>2.执行安装<br><code> python get-pip.py</code>  </p>
-<h1 id="更换pip源"><a href="#更换pip源" class="headerlink" title="更换pip源"></a>更换pip源</h1><h2 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~ <span class="built_in">mkdir</span> .pip </span><br><span class="line">vi pip.conf</span><br><span class="line">[global] index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<h1 id="更换pip源"><a href="#更换pip源" class="headerlink" title="更换pip源"></a>更换pip源</h1><h2 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~ <span class="token function">mkdir</span> .pip 
+<span class="token function">vi</span> pip.conf
+<span class="token punctuation">[</span>global<span class="token punctuation">]</span> index-url <span class="token operator">=</span> https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h2><ul>
 <li>在user目录中创建一个pip目录，如：<code>C:\Users\xx\pip</code>，新建文件pip.ini,内容如下：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url=https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">trusted-host=pypi.tuna.tsinghua.edu.cn</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>global<span class="token punctuation">]</span>
+index-url<span class="token operator">=</span>https://pypi.tuna.tsinghua.edu.cn/simple
+<span class="token punctuation">[</span>install<span class="token punctuation">]</span>
+trusted-host<span class="token operator">=</span>pypi.tuna.tsinghua.edu.cn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其他国内源</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://pypi.douban.com/ 豆瓣</span><br><span class="line">http://pypi.hustunique.com/ 华中理工大学</span><br><span class="line">http://pypi.sdutlinux.org/ 山东理工大学</span><br><span class="line">http://pypi.mirrors.ustc.edu.cn/ 中国科学技术大学</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">http://pypi.douban.com/ 豆瓣
+http://pypi.hustunique.com/ 华中理工大学
+http://pypi.sdutlinux.org/ 山东理工大学
+http://pypi.mirrors.ustc.edu.cn/ 中国科学技术大学<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="多版本共存"><a href="#多版本共存" class="headerlink" title="多版本共存"></a>多版本共存</h1><ul>
 <li>直接执行“pip xxx”时会调用pythonX版本的pip，如需执行pythonY版本的，则需要加上“PythonY -m”</li>
 <li>Windows环境下可以将pip2&#x2F;pip3加入环境变量</li>
@@ -450,12 +458,36 @@ Windows下安装Python3时默认安装pip，将Python安装目录下的scripts�
 <li><p>使用方法：<br><code>pip &lt;command&gt; [options]</code></p>
 </li>
 <li><p>相关命令如下：</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#安装包  </span></span><br><span class="line">pip install  [package]        </span><br><span class="line"> <span class="comment">#卸载包 </span></span><br><span class="line">pip uninstall [package]   </span><br><span class="line"> <span class="comment">#以需求文件的格式输出以安装的包,无法通过install安装的包默认不显示 </span></span><br><span class="line">pip freeze </span><br><span class="line"><span class="comment">#列出以安装的包</span></span><br><span class="line"> pip list                             </span><br><span class="line"> <span class="comment">#显示以安装包的信息 </span></span><br><span class="line">pip show [package]        </span><br><span class="line"><span class="comment">#验证已经安装的包具有兼容的依赖文件</span></span><br><span class="line"> pip check                        </span><br><span class="line"> <span class="comment">#计算包的hash值  </span></span><br><span class="line">pip <span class="built_in">hash</span>                         </span><br></pre></td></tr></table></figure>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> <span class="token comment">#安装包  </span>
+pip <span class="token function">install</span>  <span class="token punctuation">[</span>package<span class="token punctuation">]</span>        
+ <span class="token comment">#卸载包 </span>
+pip uninstall <span class="token punctuation">[</span>package<span class="token punctuation">]</span>   
+ <span class="token comment">#以需求文件的格式输出以安装的包,无法通过install安装的包默认不显示 </span>
+pip freeze 
+<span class="token comment">#列出以安装的包</span>
+ pip list                             
+ <span class="token comment">#显示以安装包的信息 </span>
+pip show <span class="token punctuation">[</span>package<span class="token punctuation">]</span>        
+<span class="token comment">#验证已经安装的包具有兼容的依赖文件</span>
+ pip check                        
+ <span class="token comment">#计算包的hash值  </span>
+pip <span class="token builtin class-name">hash</span>                         <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>如需查找options，加上–help即可</p>
 </li>
 <li><p>常用命令如下：</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在线安装包</span></span><br><span class="line"> pip install package_name     </span><br><span class="line"> <span class="comment">#本地安装 </span></span><br><span class="line">pip install -t %Python_home%/site-packages/         package_name </span><br><span class="line">	pip install 下载的.whl结尾的文件的绝对地址+文件名(使用此方法需先执行`pip install wheel`)</span><br><span class="line"><span class="comment">#安装指定版本的包</span></span><br><span class="line"> pip install applicationName==version  </span><br><span class="line"> <span class="comment">#检查需要更新的包  </span></span><br><span class="line">pip list --outdated      </span><br><span class="line"> <span class="comment">#升级到指定版本 </span></span><br><span class="line">pip install --upgrade package_name    </span><br><span class="line"> pip install --upgrade keras==2.1.0    </span><br></pre></td></tr></table></figure></li>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#在线安装包</span>
+ pip <span class="token function">install</span> package_name     
+ <span class="token comment">#本地安装 </span>
+pip <span class="token function">install</span> <span class="token parameter variable">-t</span> %Python_home%/site-packages/         package_name 
+	pip <span class="token function">install</span> 下载的.whl结尾的文件的绝对地址+文件名<span class="token punctuation">(</span>使用此方法需先执行<span class="token variable"><span class="token variable">`</span>pip <span class="token function">install</span> wheel<span class="token variable">`</span></span><span class="token punctuation">)</span>
+<span class="token comment">#安装指定版本的包</span>
+ pip <span class="token function">install</span> <span class="token assign-left variable">applicationName</span><span class="token operator">==</span>version  
+ <span class="token comment">#检查需要更新的包  </span>
+pip list <span class="token parameter variable">--outdated</span>      
+ <span class="token comment">#升级到指定版本 </span>
+pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> package_name    
+ pip <span class="token function">install</span> <span class="token parameter variable">--upgrade</span> <span class="token assign-left variable">keras</span><span class="token operator">==</span><span class="token number">2.1</span>.0    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 <h1 id="pip虚拟化"><a href="#pip虚拟化" class="headerlink" title="pip虚拟化"></a>pip虚拟化</h1><h2 id="pipenv"><a href="#pipenv" class="headerlink" title="pipenv"></a>pipenv</h2><p>在使用pipenv之前，必须彻底的忘记pip这个东西</p>
 <ol>
@@ -484,7 +516,14 @@ Windows下安装Python3时默认安装pip，将Python安装目录下的scripts�
 <li><p>常用命令：</p>
 </li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pipenv graph                  查看目前安装的库及其依赖</span><br><span class="line">pipenv uninstall --all        卸载全部包并从Pipfile中移除</span><br><span class="line">pipenv uninstall django==1.11 卸载指定包并从Pipfile中移除</span><br><span class="line">pipenv update requests        <span class="comment"># 更新指定个包</span></span><br><span class="line">pipenv update                 <span class="comment"># 更新所有的包</span></span><br><span class="line">pipenv shell  <span class="comment"># 进入环境</span></span><br><span class="line"><span class="built_in">exit</span>  <span class="comment"># 退出环境</span></span><br><span class="line">pipenv --<span class="built_in">rm</span>   <span class="comment"># 删除虚拟环境</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pipenv graph                  查看目前安装的库及其依赖
+pipenv uninstall <span class="token parameter variable">--all</span>        卸载全部包并从Pipfile中移除
+pipenv uninstall <span class="token assign-left variable">django</span><span class="token operator">==</span><span class="token number">1.11</span> 卸载指定包并从Pipfile中移除
+pipenv update requests        <span class="token comment"># 更新指定个包</span>
+pipenv update                 <span class="token comment"># 更新所有的包</span>
+pipenv shell  <span class="token comment"># 进入环境</span>
+<span class="token builtin class-name">exit</span>  <span class="token comment"># 退出环境</span>
+pipenv <span class="token parameter variable">--rm</span>   <span class="token comment"># 删除虚拟环境</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -942,13 +981,9 @@ Windows下安装Python3时默认安装pip，将Python安装目录下的scripts�
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
 
 
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:admin@secgxx.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -957,10 +992,6 @@ Windows下安装Python3时默认安装pip，将Python安装目录下的scripts�
 
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 

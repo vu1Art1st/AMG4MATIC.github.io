@@ -419,9 +419,11 @@
 <h2 id="音频隐写"><a href="#音频隐写" class="headerlink" title="音频隐写"></a>音频隐写</h2><p>与音频相关的 CTF 题目主要使用了隐写的策略，主要分为 MP3 隐写，LSB 隐写，波形隐写，频谱隐写等等。</p>
 <h3 id="常见手段"><a href="#常见手段" class="headerlink" title="常见手段"></a>常见手段</h3><p>通过 <code>binwalk</code> 以及 <code>strings</code> 可以发现的信息不再详述。</p>
 <h3 id="MP3-隐写"><a href="#MP3-隐写" class="headerlink" title="MP3 隐写"></a>MP3 隐写</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>MP3隐写主要是使用 <a target="_blank" rel="noopener" href="http://www.petitcolas.net/steganography/mp3stego/">Mp3Stego</a> 工具进行隐写，其基本介绍及使用方法如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encode -E hidden_text.txt -P pass svega.wav svega_stego.mp3</span><br><span class="line">decode -X -P pass svega_stego.mp3</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">encode <span class="token parameter variable">-E</span> hidden_text.txt <span class="token parameter variable">-P</span> pass svega.wav svega_stego.mp3
+decode <span class="token parameter variable">-X</span> <span class="token parameter variable">-P</span> pass svega_stego.mp3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>此外这个工具也有一个gui的版本。</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">链接: https://pan.baidu.com/s/1EKblDmkcRSxaN8lmqCMD0g 提取码: 88qt </span><br><span class="line">--来自百度网盘超级会员v3的分享</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-console" data-language="console"><code class="language-console">链接: https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1EKblDmkcRSxaN8lmqCMD0g 提取码: 88qt 
+--来自百度网盘超级会员v3的分享<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><blockquote>
 <p>ISCC-2016: Music Never Sleep</p>
@@ -430,19 +432,19 @@
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211009160707.png" alt="20211009160707"></p>
 <p>需要注意的是，这个GUI工具需要把需要解密的文件放到程序的根目录下面</p>
 <p>得到文件 <code>iscc2016.mp3.txt</code>:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flag is SkYzWEk0M1JOWlNHWTJTRktKUkdJTVpXRzVSV0U2REdHTVpHT1pZPQ== ???</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Flag is SkYzWEk0M1JOWlNHWTJTRktKUkdJTVpXRzVSV0U2REdHTVpHT1pZPQ&#x3D;&#x3D; ???<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>Base64 &amp;&amp; Base32 后得到 flag。</p>
 <h3 id="波形"><a href="#波形" class="headerlink" title="波形"></a>波形</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>通常来说，波形方向的题，在观察到异常后，使用相关软件（Audacity, Adobe Audition 等）观察波形规律，将波形进一步转化为 01 字符串等，从而提取转化出最终的 flag。</p>
 <h4 id="例题-波形1"><a href="#例题-波形1" class="headerlink" title="例题-波形1"></a>例题-波形1</h4><p>使用Audacity打开，观察波形</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211009165548.png" alt="20211009165548"></p>
 <p>长短空，猜测是摩斯密码。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.... .-.. . .. -.-. .. -.-. - ... - .-- --- --- -.-. ..-. . -- -.-. -. .----</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">.... .-.. . .. -.-. .. -.-. - ... - .-- --- --- -.-. ..-. . -- -.-. -. .----<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>摩斯密码解密，在进行栅栏得到 flag。</p>
 <h4 id="例题-波形2"><a href="#例题-波形2" class="headerlink" title="例题-波形2"></a>例题-波形2</h4><p>打开波形图，发现最前段有异常<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211009165822.png" alt="20211009165822"></p>
 <p>取高点为1，低点为0得</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">110011011011001100001110011111110111010111011000010101110101010110011011101011101110110111011110011111101</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-console" data-language="console"><code class="language-console">110011011011001100001110011111110111010111011000010101110101010110011011101011101110110111011110011111101<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>取值以后发现一共105位，为7的倍数，因此猜测需要7位一组补0后转ascii得flag</p>
 <h3 id="频谱"><a href="#频谱" class="headerlink" title="频谱"></a>频谱</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><p>音频中的频谱隐写是将字符串隐藏在频谱中，此类音频通常会有一个较明显的特征，听起来是一段杂音或者比较刺耳。</p>
 <h4 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h4><blockquote>
@@ -921,13 +923,9 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
 
 
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:admin@secgxx.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -936,10 +934,6 @@
 
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 

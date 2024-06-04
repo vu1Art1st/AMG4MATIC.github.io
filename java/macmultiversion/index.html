@@ -424,27 +424,38 @@
 <p>官方链接目前提供8、11、16三个版本的下载。想下载6的话需要去<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase-java-archive-javase6-downloads.html">另一个链接</a>下载</p>
 <p>使用<code>homebrew</code>进行安装的话分为以下两种情况（brew会安装openjdk）：</p>
 <ul>
-<li>安装最新版的JDK<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install java</span><br></pre></td></tr></table></figure></li>
-<li>安装指定版本的JDK <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew/cask-versions</span><br><span class="line">brew search java</span><br><span class="line">brew install java*</span><br></pre></td></tr></table></figure>
+<li>安装最新版的JDK<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew cask <span class="token function">install</span> <span class="token function">java</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>安装指定版本的JDK <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew tap homebrew/cask-versions
+brew search <span class="token function">java</span>
+brew <span class="token function">install</span> java*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 然后根据搜索的结果进行安装</li>
 </ul>
-<h2 id="查看JDK安装路径"><a href="#查看JDK安装路径" class="headerlink" title="查看JDK安装路径"></a>查看JDK安装路径</h2>   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/libexec/java_home -V</span><br></pre></td></tr></table></figure>
+<h2 id="查看JDK安装路径"><a href="#查看JDK安装路径" class="headerlink" title="查看JDK安装路径"></a>查看JDK安装路径</h2>   <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/libexec/java_home <span class="token parameter variable">-V</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>  <img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210507090926.png" alt="20210507090926"><br>  如图，这里安装了java8和java16</p>
 <h2 id="多版本JDK管理-jEnv"><a href="#多版本JDK管理-jEnv" class="headerlink" title="多版本JDK管理-jEnv"></a>多版本JDK管理-jEnv</h2><blockquote>
 <p>jEnv的官网介绍说:”jEnv is a command line tool to help you forget how to set the JAVA_HOME environment variable” 一个帮助你忘却配置环境变量的工具</p>
 </blockquote>
-<h3 id="下载jEnv"><a href="#下载jEnv" class="headerlink" title="下载jEnv"></a>下载jEnv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#git</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/jenv/jenv.git ~/.jenv</span><br><span class="line"><span class="comment">#homebrew</span></span><br><span class="line">brew install jenv</span><br></pre></td></tr></table></figure>
-<h3 id="安装jEnv"><a href="#安装jEnv" class="headerlink" title="安装jEnv"></a>安装jEnv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=&quot;$HOME/.jenv/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(jenv init -)&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
-<h3 id="配置jEnv"><a href="#配置jEnv" class="headerlink" title="配置jEnv"></a>配置jEnv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br><span class="line">/usr/libexec/java_home -V</span><br><span class="line">jenv add java_home</span><br></pre></td></tr></table></figure>
+<h3 id="下载jEnv"><a href="#下载jEnv" class="headerlink" title="下载jEnv"></a>下载jEnv</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#git</span>
+<span class="token function">git</span> clone https://github.com/jenv/jenv.git ~/.jenv
+<span class="token comment">#homebrew</span>
+brew <span class="token function">install</span> jenv<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="安装jEnv"><a href="#安装jEnv" class="headerlink" title="安装jEnv"></a>安装jEnv</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">'export PATH="$HOME/.jenv/bin:$PATH"'</span> <span class="token operator">>></span> ~/.zshrc
+<span class="token builtin class-name">echo</span> <span class="token string">'eval "$(jenv init -)"'</span> <span class="token operator">>></span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="配置jEnv"><a href="#配置jEnv" class="headerlink" title="配置jEnv"></a>配置jEnv</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> ~/.zshrc
+/usr/libexec/java_home <span class="token parameter variable">-V</span>
+jenv <span class="token function">add</span> java_home<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210507101244.png" alt="20210507101244"></p>
 <h3 id="使用jEnv"><a href="#使用jEnv" class="headerlink" title="使用jEnv"></a>使用jEnv</h3><p>jEnv常用的有三个参数global、local、shell<br>这里推荐用local按照目录进行管理，使用了local命令以后会在目录下生成一个<code>.java-version</code>的文件，只要不删除该文件，当前目录会使用采用文件配置的java版本<br>List managed JDKs</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ jenv versions</span><br><span class="line">  system</span><br><span class="line">  oracle64-1.6.0.39</span><br><span class="line">* oracle64-1.7.0.11 (<span class="built_in">set</span> by /Users/hikage/.jenv/version)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv versions
+  system
+  oracle64-1.6.0.39
+* oracle64-1.7.0.11 <span class="token punctuation">(</span>set by /Users/hikage/.jenv/version<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Configure global version</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jenv global oracle64-1.6.0.39</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv global oracle64-1.6.0.39<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Configure local version (per directory)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jenv <span class="built_in">local</span> oracle64-1.6.0.39</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv <span class="token builtin class-name">local</span> oracle64-1.6.0.39<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Configure shell instance version</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jenv shell oracle64-1.6.0.39</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv shell oracle64-1.6.0.39<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 <hr>
@@ -922,13 +933,9 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
 
 
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:admin@secgxx.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -937,10 +944,6 @@
 
 
 
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
