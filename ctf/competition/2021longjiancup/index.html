@@ -404,6 +404,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -421,7 +424,7 @@
 <h3 id="2-1-题目内容"><a href="#2-1-题目内容" class="headerlink" title="2.1 题目内容"></a>2.1 题目内容</h3><p>该网站使用了__<code>jwt</code>____ 认证方式。</p>
 <h3 id="2-2-题目内容"><a href="#2-2-题目内容" class="headerlink" title="2.2 题目内容"></a>2.2 题目内容</h3><p>黑客绕过验证使用的jwt中，id和username是__<code>10087#admin</code>____ 。（中间使用#号隔开，例如1#admin）</p>
 <h4 id="解题过程-1"><a href="#解题过程-1" class="headerlink" title="解题过程"></a>解题过程</h4><p>获取可执行命令的jwt：<code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwODcsIk1hcENsYWltcyI6eyJ1c2VybmFtZSI6ImFkbWluIn19.rurQD5RYgMrFZow8r-k7KCP13P32sF-RpTXhKsxzvD0</code><br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210922171714.png" alt="20210922171714"><br>解码获取id和username：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>01签到<span class="token punctuation">]</span> basecrack <span class="token parameter variable">-b</span> <span class="token string">'eyJpZCI6MTAwODcsIk1hcENsYWltcyI6eyJ1c2VybmFtZSI6ImFkbWluIn19'</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>01签到<span class="token punctuation">]</span> basecrack <span class="token parameter variable">-b</span> <span class="token string">'eyJpZCI6MTAwODcsIk1hcENsYWltcyI6eyJ1c2VybmFtZSI6ImFkbWluIn19'</span>
 
 		python basecrack.py <span class="token parameter variable">-h</span> <span class="token punctuation">[</span>FOR HELP<span class="token punctuation">]</span>
 
@@ -430,7 +433,7 @@
 <span class="token punctuation">[</span><span class="token operator">></span><span class="token punctuation">]</span> Decoding as Base64: <span class="token punctuation">&#123;</span><span class="token string">"id"</span>:10087,<span class="token string">"MapClaims"</span>:<span class="token punctuation">&#123;</span><span class="token string">"username"</span><span class="token builtin class-name">:</span><span class="token string">"admin"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
 
 <span class="token punctuation">[</span>-<span class="token punctuation">]</span> The Encoding Scheme Is Base64
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <h3 id="2-3-题目内容"><a href="#2-3-题目内容" class="headerlink" title="2.3 题目内容"></a>2.3 题目内容</h3><p>黑客获取webshell之后，权限是__<code>root</code>____ ？<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210922172216.png" alt="20210922172216"></p>
 <h3 id="2-4-题目内容"><a href="#2-4-题目内容" class="headerlink" title="2.4 题目内容"></a>2.4 题目内容</h3><p>黑客上传的恶意文件文件名是____<code>1.c</code>_________。(请提交带有文件后缀的文件名，例如x.txt)</p>
@@ -472,7 +475,7 @@
 </blockquote>
 <h3 id="6-1-题目内容"><a href="#6-1-题目内容" class="headerlink" title="6.1 题目内容"></a>6.1 题目内容</h3><p>虚拟机的密码是____ <code>flag&#123;W31C0M3 T0 THiS 34SY F0R3NSiCX&#125;</code>_________。（密码中为flag{xxxx}，含有空格，提交时不要去掉）</p>
 <h4 id="解题过程-2"><a href="#解题过程-2" class="headerlink" title="解题过程"></a>解题过程</h4><p>这里可以使用工具自带的lsadump也可以安装mimikatz插件获取</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>06内存分析<span class="token punctuation">]</span> volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 mimikatz
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>06内存分析<span class="token punctuation">]</span> volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 mimikatz
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>.1
 Module   User             Domain           Password
 -------- ---------------- ---------------- ----------------------------------------
@@ -492,9 +495,9 @@ DPAPI_SYSTEM
 0x00000000  2c 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ,<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.
 0x00000010  01 00 00 00 <span class="token number">49</span> 06 <span class="token number">16</span> <span class="token number">35</span> a7 <span class="token number">90</span> b6 2a <span class="token number">53</span> <span class="token number">69</span> 03 <span class="token number">27</span>   <span class="token punctuation">..</span><span class="token punctuation">..</span>I<span class="token punctuation">..</span><span class="token number">5</span><span class="token punctuation">..</span>.*Si.'
 0x00000020  b9 9a <span class="token number">60</span> 9e 9a <span class="token number">15</span> <span class="token number">90</span> <span class="token number">37</span> 7c cf 1d 3c f1 3f <span class="token number">60</span> 05   <span class="token punctuation">..</span><span class="token variable"><span class="token variable">`</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token number">7</span><span class="token operator">|</span><span class="token punctuation">..</span><span class="token operator">&lt;</span>.?<span class="token variable">`</span></span><span class="token builtin class-name">.</span>
-0x00000030  <span class="token number">56</span> c1 <span class="token number">59</span> <span class="token number">68</span> <span class="token number">53</span> 9a <span class="token function">dc</span> e0 <span class="token number">18</span> b3 <span class="token number">55</span> ef 00 00 00 00   V.YhS<span class="token punctuation">..</span><span class="token punctuation">..</span>.U<span class="token punctuation">..</span><span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+0x00000030  <span class="token number">56</span> c1 <span class="token number">59</span> <span class="token number">68</span> <span class="token number">53</span> 9a <span class="token function">dc</span> e0 <span class="token number">18</span> b3 <span class="token number">55</span> ef 00 00 00 00   V.YhS<span class="token punctuation">..</span><span class="token punctuation">..</span>.U<span class="token punctuation">..</span><span class="token punctuation">..</span>.</code></pre>
 <h3 id="6-2-题目内容"><a href="#6-2-题目内容" class="headerlink" title="6.2 题目内容"></a>6.2 题目内容</h3><p>虚拟机中有一个某品牌手机的备份文件，文件里的图片里的字符串为______ <code>flag&#123;TH4NK Y0U FOR DECRYPTING MY DATA&#125;</code>_______。（解题过程中需要用到上一题答案中flag{}内的内容进行处理。本题的格式也是flag{xxx}，含有空格，提交时不要去掉）</p>
-<h4 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 filescan <span class="token operator">|</span><span class="token function">grep</span> CTF
+<h4 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h4><pre class="language-bash" data-language="bash"><code class="language-bash">volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 filescan <span class="token operator">|</span><span class="token function">grep</span> CTF
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>.1
 
 <span class="token punctuation">..</span>.
@@ -505,9 +508,9 @@ Volatility Foundation Volatility Framework <span class="token number">2.6</span>
 0x000000007fdc2700      <span class="token number">2</span>      <span class="token number">2</span> RW-rwd <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>AppData<span class="token punctuation">\</span>Local<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>Explorer<span class="token punctuation">\</span>thumbcache_sr.db
 0x000000007fe72070      <span class="token number">1</span>      <span class="token number">1</span> RW-rwd <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>AppData<span class="token punctuation">\</span>Local<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>Explorer<span class="token punctuation">\</span>thumbcache_idx.db
 0x000000007fe72430      <span class="token number">2</span>      <span class="token number">0</span> -W-r-- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz<span class="token punctuation">\</span>picture<span class="token punctuation">\</span>storage<span class="token punctuation">\</span>MediaTar<span class="token punctuation">\</span>images<span class="token punctuation">\</span>images0.tar.enc
-0x000000007feabbc0     <span class="token number">16</span>      <span class="token number">0</span> -W-r-- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz<span class="token punctuation">\</span>picture.xml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+0x000000007feabbc0     <span class="token number">16</span>      <span class="token number">0</span> -W-r-- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz<span class="token punctuation">\</span>picture.xml</code></pre>
 <p>这里使用filescan扫描CTF用户的文件，发现了华为P40的备份文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 filescan <span class="token operator">|</span><span class="token function">grep</span> HUAWEI
+<pre class="language-bash" data-language="bash"><code class="language-bash">volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 filescan <span class="token operator">|</span><span class="token function">grep</span> HUAWEI
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>.1
 0x000000007d8c7d10      <span class="token number">4</span>      <span class="token number">0</span> R--r-d <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz.exe
 0x000000007e164cc0     <span class="token number">12</span>      <span class="token number">0</span> R--r-- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz.exe
@@ -519,11 +522,11 @@ Volatility Foundation Volatility Framework <span class="token number">2.6</span>
 <span class="token punctuation">[</span>06内存分析<span class="token punctuation">]</span> volatility <span class="token parameter variable">-f</span> Target.vmem  <span class="token parameter variable">--profile</span><span class="token operator">=</span>Win7SP1x64 dumpfiles <span class="token parameter variable">-Q</span> 0x000000007d8c7d10 --dump-dir<span class="token operator">=</span>./
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>.1
 ImageSectionObject 0x7d8c7d10   None   <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz.exe
-DataSectionObject 0x7d8c7d10   None   <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+DataSectionObject 0x7d8c7d10   None   <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>CTF<span class="token punctuation">\</span>Desktop<span class="token punctuation">\</span>HUAWEI P40_2021-aa-bb xx.yy.zz.exe</code></pre>
 
 <p>于是把华为备份文件dump出来，同时可以直接在dat文件里把备份文件夹解压出来，再利用工具 <a target="_blank" rel="noopener" href="https://github.com/RealityNet/kobackupdec">kobackupdec</a></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">python3 kobackupdec<span class="token punctuation">.</span>py <span class="token operator">-</span>vvv W31C0M3_T0_THiS_34SY_F0R3NSiCX HUAWEI\ P40_2021<span class="token operator">-</span>aa<span class="token operator">-</span>bb\ xx<span class="token punctuation">.</span>yy<span class="token punctuation">.</span>zz <span class="token punctuation">.</span><span class="token operator">/</span>bb
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python">python3 kobackupdec<span class="token punctuation">.</span>py <span class="token operator">-</span>vvv W31C0M3_T0_THiS_34SY_F0R3NSiCX HUAWEI\ P40_2021<span class="token operator">-</span>aa<span class="token operator">-</span>bb\ xx<span class="token punctuation">.</span>yy<span class="token punctuation">.</span>zz <span class="token punctuation">.</span><span class="token operator">/</span>bb
+</code></pre>
 <p>即可获取flag<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210923152921.png" alt="20210923152921"></p>
 <h2 id="07简单的日志分析"><a href="#07简单的日志分析" class="headerlink" title="07简单的日志分析"></a>07简单的日志分析</h2><blockquote>
 <p>某应用程序被攻击，请分析日志后作答</p>
@@ -535,7 +538,7 @@ DataSectionObject 0x7d8c7d10   None   <span class="token punctuation">\</span>De
 <h3 id="8-2-题目内容"><a href="#8-2-题目内容" class="headerlink" title="8.2 题目内容"></a>8.2 题目内容</h3><p>黑客在注入过程中，最终获取flag的数据库名、表名和字段名是_____ <code>sqli#flag#flag</code>________。（格式为“数据库名#表名#字段名”，例如database#table#column）</p>
 <p>直接看最后注flag就能获取</p>
 <h3 id="8-3-题目内容"><a href="#8-3-题目内容" class="headerlink" title="8.3 题目内容"></a>8.3 题目内容</h3><p>黑客最后获取到的flag字符串为_____ <code>flag&#123;deddcd67-bcfd-487e-b940-1217e668c7db&#125;</code>________。</p>
-<h4 id="解题过程-4"><a href="#解题过程-4" class="headerlink" title="解题过程"></a>解题过程</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<h4 id="解题过程-4"><a href="#解题过程-4" class="headerlink" title="解题过程"></a>解题过程</h4><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'flag.txt'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
     s <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
@@ -557,7 +560,7 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 <span class="token keyword">print</span> flag<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\''</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
 
 
-<span class="token comment">#flag&#123;dedcd67-bcfd-487e-b940-1217e668c7db&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#flag&#123;dedcd67-bcfd-487e-b940-1217e668c7db&#125;</span></code></pre>
 
 <h2 id="09-wifi"><a href="#09-wifi" class="headerlink" title="09 wifi"></a>09 wifi</h2><blockquote>
 <p>网管小王最近喜欢上了ctf网络安全竞赛，他使用“哥斯拉”木马来玩玩upload-labs，并且保存了内存镜像、wifi流量和服务器流量，让您来分析后作答：（本题仅1小问)</p>
@@ -570,10 +573,10 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 <p>网卡的 GUID 和接口绑定是绑定的，win7的wifi密码就存放在c:\ProgramData\Microsoft\Wlansvc\Profiles\Interfaces[网卡Guid]中</p>
 </blockquote>
 <p>如果不知道这里，其实也可以使用命令：</p>
-<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">getmac &#x2F;V &#x2F;S 127.0.0.1 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-cmd" data-language="cmd"><code class="language-cmd">getmac &#x2F;V &#x2F;S 127.0.0.1 </code></pre>
 <p>然后再everything搜索一下<br>因此这里直接搜索Interface<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/iShot2021-09-24%2009.30.34.png" alt="iShot2021-09-24 09.30.34"></p>
 <p>解压之后回去xml，里面存在wifi的信息</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0"?></span>
+<pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0"?></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>WLANProfile</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.microsoft.com/networking/WLAN/profile/v1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>My_Wifi<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
 	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SSIDConfig</span><span class="token punctuation">></span></span>
@@ -599,11 +602,11 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>security</span><span class="token punctuation">></span></span>
 	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>MSM</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>WLANProfile</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <p>因此可以解密wifi流量<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924103208.png" alt="20210924103208"></p>
 <p>这里也可以使用如下命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">airdecap-ng <span class="token parameter variable">-e</span> My_Wifi <span class="token parameter variable">-p</span> <span class="token number">233</span>@114514_qwe  客户端.cap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">airdecap-ng <span class="token parameter variable">-e</span> My_Wifi <span class="token parameter variable">-p</span> <span class="token number">233</span>@114514_qwe  客户端.cap</code></pre>
 
 <p>解密后可以获取加密返回的信息,到这里基础信息收集完毕了，剩下的就是解密流量了，参考文章：</p>
 <ul>
@@ -612,7 +615,7 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924114920.png" alt="20210924114920"><br>根据上面的文章可以知道（对于PHP_XOR_BASE64加密方式来说，前后各附加了16位的混淆字符），所以我们拿到的流量要先删除前16位和后16位字符，同时Godzilla的流量还会进行一个gzip压缩，因此最外层还要用gzdecode进行一次解码。<br>最终解密1198号数据包的时候获取flag</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924103539.png" alt="20210924103539"></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<pre class="language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 <span class="token keyword">function</span> <span class="token function-definition function">encode</span><span class="token punctuation">(</span><span class="token variable">$D</span><span class="token punctuation">,</span><span class="token variable">$K</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">&lt;</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$D</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		<span class="token variable">$c</span> <span class="token operator">=</span> <span class="token variable">$K</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token operator">+</span><span class="token number">1</span><span class="token operator">&amp;</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -625,7 +628,7 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 <span class="token variable">$payloadName</span><span class="token operator">=</span><span class="token string single-quoted-string">'payload'</span><span class="token punctuation">;</span>
 <span class="token variable">$key</span><span class="token operator">=</span><span class="token string single-quoted-string">'3c6e0b8a9c15224a'</span><span class="token punctuation">;</span>
 <span class="token keyword">echo</span> <span class="token function">gzdecode</span><span class="token punctuation">(</span><span class="token function">encode</span><span class="token punctuation">(</span><span class="token function">base64_decode</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'fL1tMGI4YTljMn75e3jOBS5/V31Qd1NxKQMCe3h4KwFQfVAEVworCi0FfgB+BlWZhjRlQuTIIB5jMTU='</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token delimiter important">?></span></span></code></pre>
 <p>在<a target="_blank" rel="noopener" href="https://www.dooccn.com/php5.4/">5.x的环境</a>中运行获取flag <code>flag&#123;5db5b7b0bb74babb66e1522f3a6b1b12&#125;</code></p>
 <p>最后提供一个非常大神的<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/PUb1qkybBz3ATsKmsEuIJQ">解决方案</a>，自己用同样的木马连接一下，然后改返回包就行了<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924114705.png" alt="20210924114705"></p>
 <h2 id="10-ios"><a href="#10-ios" class="headerlink" title="10 ios"></a>10 ios</h2><p>一位ios的安全研究员在家中使用手机联网被黑，不仅被窃密还丢失比特币若干，请你通过流量和日志分析后作答</p>
@@ -635,10 +638,10 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 <h3 id="10-4-题目内容"><a href="#10-4-题目内容" class="headerlink" title="10.4 题目内容"></a>10.4 题目内容</h3><p>黑客通过SQL盲注拿到了一个敏感数据，内容是_____ <code>flag&#123;746558f3-c841-456b-85d7-d6c0f2edabb2&#125;</code>_______。</p>
 <h4 id="解题过程-6"><a href="#解题过程-6" class="headerlink" title="解题过程"></a>解题过程</h4><p>首先把TLS流量解密<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924140929.png" alt="20210924140929"><br>按照协议进行排序，发现盲注的流量出现了http2的协议部分<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924141447.png" alt="20210924141447"></p>
 <p>导出数据为csv格式<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924163926.png" alt="20210924163926"><br>筛选出sql注入的流量<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924164038.png" alt="20210924164038"><br>url解码并使用awk处理一下数据</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">awk</span> <span class="token string">'&#123;print $2,$3&#125;'</span> sql.txt <span class="token operator">></span>sql1.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">awk</span> <span class="token string">'&#123;print $2,$3&#125;'</span> sql.txt <span class="token operator">></span>sql1.txt</code></pre>
 
 <p>最终脚本获取flag</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'sql1.txt'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
     s <span class="token operator">=</span> f<span class="token punctuation">.</span>readlines<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
@@ -665,7 +668,7 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
         <span class="token keyword">pass</span>
 
 <span class="token keyword">print</span> flag<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\''</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <h3 id="10-5-题目内容"><a href="#10-5-题目内容" class="headerlink" title="10.5 题目内容"></a>10.5 题目内容</h3><p>黑客端口扫描的扫描器的扫描范围是_____ <code>10-499</code>_______。（格式使用“开始端口-结束端口”，例如1-65535）</p>
 <h4 id="解题过程-7"><a href="#解题过程-7" class="headerlink" title="解题过程"></a>解题过程</h4><p>找红色的，然后筛选一下获取端口扫描范围<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210924170843.png" alt="20210924170843"></p>
 <h3 id="10-6-题目内容"><a href="#10-6-题目内容" class="headerlink" title="10.6 题目内容"></a>10.6 题目内容</h3><p>被害者手机上被拿走了的私钥文件内容是____________。</p>
@@ -933,6 +936,9 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

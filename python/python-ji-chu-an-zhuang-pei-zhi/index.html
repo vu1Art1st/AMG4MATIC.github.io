@@ -411,6 +411,9 @@ Python虚拟化pyenv安装pyenvbrew install pyenv
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -424,17 +427,17 @@ Python虚拟化pyenv安装pyenvbrew install pyenv
 </ul>
 <h1 id="Python虚拟化"><a href="#Python虚拟化" class="headerlink" title="Python虚拟化"></a>Python虚拟化</h1><h3 id="pyenv"><a href="#pyenv" class="headerlink" title="pyenv"></a>pyenv</h3><h4 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h4><p><code>brew install pyenv</code></p>
 <h4 id="国内加速安装python环境"><a href="#国内加速安装python环境" class="headerlink" title="国内加速安装python环境"></a>国内加速安装python环境</h4><p><code>v=3.8.6;wget https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</code></p>
-<h4 id="macos-bigsur安装"><a href="#macos-bigsur安装" class="headerlink" title="macos bigsur安装"></a>macos bigsur安装</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CFLAGS</span><span class="token operator">=</span><span class="token string">"-I<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> openssl<span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> <span class="token function">bzip2</span><span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> readline<span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>xcrun --show-sdk-path<span class="token variable">)</span></span>/usr/include"</span> <span class="token assign-left variable">LDFLAGS</span><span class="token operator">=</span><span class="token string">"-L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> openssl<span class="token variable">)</span></span>/lib -L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> readline<span class="token variable">)</span></span>/lib -L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> zlib<span class="token variable">)</span></span>/lib -L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> <span class="token function">bzip2</span><span class="token variable">)</span></span>/lib"</span> pyenv <span class="token function">install</span> <span class="token parameter variable">--patch</span> <span class="token number">3.8</span>.6 <span class="token operator">&lt;</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token function">curl</span> <span class="token parameter variable">-sSL</span> https://github.com/python/cpython/commit/8ea6353.patch<span class="token punctuation">\</span>?full_index<span class="token punctuation">\</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="macos-bigsur安装"><a href="#macos-bigsur安装" class="headerlink" title="macos bigsur安装"></a>macos bigsur安装</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CFLAGS</span><span class="token operator">=</span><span class="token string">"-I<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> openssl<span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> <span class="token function">bzip2</span><span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> readline<span class="token variable">)</span></span>/include -I<span class="token variable"><span class="token variable">$(</span>xcrun --show-sdk-path<span class="token variable">)</span></span>/usr/include"</span> <span class="token assign-left variable">LDFLAGS</span><span class="token operator">=</span><span class="token string">"-L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> openssl<span class="token variable">)</span></span>/lib -L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> readline<span class="token variable">)</span></span>/lib -L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> zlib<span class="token variable">)</span></span>/lib -L<span class="token variable"><span class="token variable">$(</span>brew <span class="token parameter variable">--prefix</span> <span class="token function">bzip2</span><span class="token variable">)</span></span>/lib"</span> pyenv <span class="token function">install</span> <span class="token parameter variable">--patch</span> <span class="token number">3.8</span>.6 <span class="token operator">&lt;</span> <span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token function">curl</span> <span class="token parameter variable">-sSL</span> https://github.com/python/cpython/commit/8ea6353.patch<span class="token punctuation">\</span>?full_index<span class="token punctuation">\</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span></code></pre>
 
 
 <h1 id="Python库"><a href="#Python库" class="headerlink" title="Python库"></a>Python库</h1><h2 id="安装gmpy2"><a href="#安装gmpy2" class="headerlink" title="安装gmpy2"></a>安装gmpy2</h2><ul>
 <li><p>Windows<br>wheel 安装</p>
 </li>
 <li><p>macOS</p>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gmp
+  <pre class="language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gmp
 brew <span class="token function">install</span> mpfr
 brew <span class="token function">install</span> libmpc
-pip <span class="token function">install</span> gmpy2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+pip <span class="token function">install</span> gmpy2</code></pre></li>
 </ul>
 
                 
@@ -690,6 +693,9 @@ pip <span class="token function">install</span> gmpy2<span aria-hidden="true" cl
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

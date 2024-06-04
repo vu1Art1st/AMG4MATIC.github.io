@@ -408,6 +408,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -434,15 +437,15 @@
 <h2 id="Kali更新apt源"><a href="#Kali更新apt源" class="headerlink" title="Kali更新apt源"></a>Kali更新apt源</h2><ol>
 <li><code>vim /etc/apt/sources.list</code></li>
 <li>将如下源地址写入<ul>
-<li>中科大 <pre class="line-numbers language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib
-deb-src http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li>清华大学 <pre class="line-numbers language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;kali kali-rolling main contrib non-free
-deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;kali kali-rolling main contrib non-free<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>中科大 <pre class="language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib
+deb-src http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;kali kali-rolling main non-free contrib</code></pre></li>
+<li>清华大学 <pre class="language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;kali kali-rolling main contrib non-free
+deb-src https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;kali kali-rolling main contrib non-free</code></pre></li>
 </ul>
 </li>
-<li>写入保存后执行命令 <pre class="line-numbers language-none"><code class="language-none">apt-get update &amp;&amp; apt-get upgrade &amp;&amp; apt-get dist-upgrade
+<li>写入保存后执行命令 <pre class="language-none"><code class="language-none">apt-get update &amp;&amp; apt-get upgrade &amp;&amp; apt-get dist-upgrade
 apt-get clean
-reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+reboot</code></pre></li>
 </ol>
 <h2 id="Kali2020设置ROOT登录"><a href="#Kali2020设置ROOT登录" class="headerlink" title="Kali2020设置ROOT登录"></a>Kali2020设置ROOT登录</h2><ol>
 <li><p>开启虚拟机，按E，进入如下界面<br><img src="https://gitee.com/amg4matic/picgo/raw/master/pic2/image-20210218105256404.png" alt="image-20210218105256404"></p>
@@ -458,14 +461,14 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 <p>Kali Linux系统安装成功后，默认10分钟后将自动锁定屏幕。所以，如果10分钟内用户没有执行任何操作，将自动锁定屏幕。这样，当用户操作时，需要输入密码后才可以重新进入系统。为了避免受这些问题影响，可以设置永不锁定屏幕。设置方法如下所示：</p>
 </blockquote>
 <p>（1）在菜单栏中，依次选择“应用程序”|“设置”|“电源管理器”命令，打开Xfce电源管理器界面。<br>（2）单击“显示”选项卡，将所有选项值都设置为从不。</p>
-<h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian/gpg <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
+<h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian/gpg <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
 
 <span class="token builtin class-name">echo</span> <span class="token string">'deb https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian/ buster stable'</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/docker.list
 
 <span class="token function">sudo</span> <span class="token function">apt-get</span> update
 
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> docker-ce docker-ce-cli containerd.io
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
                 
             </div>
             <hr/>
@@ -727,6 +730,9 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

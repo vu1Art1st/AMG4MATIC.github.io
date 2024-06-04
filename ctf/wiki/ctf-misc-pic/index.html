@@ -408,6 +408,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -454,23 +457,23 @@
 </blockquote>
 <p>提取之后发现是一堆.enc文件，因此下一步就是要找enc文件解密需要的key，这里分别对GIF、enc文件、压缩包进行strings，在GiF中找到了一串16进制字符串</p>
 <p>这题的一个难点是发现并提取 GIF 中的元数据，首先 <code>strings</code> 是可以观察到异常点的。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">GIF89a
+<pre class="language-bash" data-language="bash"><code class="language-bash">GIF89a
    <span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span><span class="token string">""</span>"#<span class="token comment">##$$$%%%&amp;&amp;&amp;'''((()))***+++,,,---...///000111222333444555666777888999:::;;;&lt;&lt;&lt;===>>>???@@@AAABBBCCCDDDEEEFFFGGGHHHIIIJJJKKKLLLMMMNNNOOOPPPQQQRRRSSSTTTUUUVVVWWWXXXYYYZZZ[[[\\\]]]^^^___```aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrssstttuuuvvvwwwxxxyyyzzz&#123;&#123;&#123;|||&#125;&#125;&#125;~~~</span>
 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172
 NETSCAPE2.0
 ImageMagick
-<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">..</span>.</code></pre>
 
 <p>这里的一串16进制其实是藏在 GIF 的元数据区</p>
 <p>接下来就是提取，你可以选择 Python，但是利用 <code>identify</code> 显得更加便捷</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root <span class="token keyword">in</span> ~/Desktop/tmp λ identify <span class="token parameter variable">-format</span> <span class="token string">"%s %c <span class="token entity" title="\n">\n</span>"</span> Question.gif
+<pre class="language-bash" data-language="bash"><code class="language-bash">root <span class="token keyword">in</span> ~/Desktop/tmp λ identify <span class="token parameter variable">-format</span> <span class="token string">"%s %c <span class="token entity" title="\n">\n</span>"</span> Question.gif
 <span class="token number">0</span> 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172
 <span class="token number">1</span> 5832773639712f377933536849507565707478664177525162524f72653330633655772f6f4b3877655a547834346d30414c6f75685634364b63514a6b687271
 <span class="token punctuation">..</span>.
 <span class="token number">24</span> 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f
-<span class="token number">25</span> 724b3052485a6b745062457335797444737142486435504646773d3d<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token number">25</span> 724b3052485a6b745062457335797444737142486435504646773d3d</code></pre>
 
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 <span class="token keyword">import</span> os
 <span class="token keyword">import</span> binascii
 
@@ -492,12 +495,12 @@ f <span class="token operator">=</span> <span class="token builtin">open</span><
 temp<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
 f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
 os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">'rm -f key'</span><span class="token punctuation">)</span>
-os<span class="token punctuation">.</span>rename<span class="token punctuation">(</span><span class="token string">'key1'</span><span class="token punctuation">,</span><span class="token string">'key'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+os<span class="token punctuation">.</span>rename<span class="token punctuation">(</span><span class="token string">'key1'</span><span class="token punctuation">,</span><span class="token string">'key'</span><span class="token punctuation">)</span></code></pre>
 
 <p>这道题的下一个难点就是在做了十六进制解码以后，意识到这是一个rsakey</p>
 <p>意识到这个是个私钥以后就好办了，先解密一个partaa.enc看一下<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210910103938.png" alt="20210910103938"></p>
 <p>于是脚本搞定</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 <span class="token keyword">import</span> string
 <span class="token keyword">import</span> os
 dic <span class="token operator">=</span> string<span class="token punctuation">.</span>ascii_letters
@@ -517,13 +520,13 @@ i1<span class="token operator">=</span><span class="token number">0</span>
         os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">'openssl rsautl -decrypt -inkey key -in %s -out %s'</span> <span class="token operator">%</span><span class="token punctuation">(</span><span class="token builtin">file</span> <span class="token punctuation">,</span>file1<span class="token punctuation">)</span><span class="token punctuation">)</span>
         file1 <span class="token operator">=</span> <span class="token builtin">file</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
         os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">'rm -f %s %s'</span> <span class="token operator">%</span><span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span>file1<span class="token punctuation">)</span><span class="token punctuation">)</span>
-os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">'cat part* > final'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">'cat part* > final'</span><span class="token punctuation">)</span></code></pre>
 <p>最终获取flag<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210910104238.png" alt="20210910104238"></p>
 <h2 id="像素值转化"><a href="#像素值转化" class="headerlink" title="像素值转化"></a>像素值转化</h2><h3 id="例题-神奇的二维码"><a href="#例题-神奇的二维码" class="headerlink" title="例题-神奇的二维码"></a>例题-神奇的二维码</h3><p>看看这个文件里的数据，你能想到什么？</p>
-<pre class="line-numbers language-none"><code class="language-none">255,255,255,255,255...........<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-none"><code class="language-none">255,255,255,255,255...........</code></pre>
 
 <p>是一串 RGB 值，尝试着将他转化为图片</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
 <span class="token keyword">import</span> re
 
 x <span class="token operator">=</span> <span class="token number">180</span> <span class="token comment">#x坐标  对于文件里的RGB数据组进行分解</span>
@@ -541,7 +544,7 @@ m<span class="token operator">=</span><span class="token number">0</span>
 
         im<span class="token punctuation">.</span>putpixel<span class="token punctuation">(</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>rgb<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">int</span><span class="token punctuation">(</span>rgb<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">int</span><span class="token punctuation">(</span>rgb<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#rgb转化为像素</span>
 im<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
-im<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"flag.png"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+im<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"flag.png"</span><span class="token punctuation">)</span></code></pre>
 
 <p>然后就是扫描获得一串字符串，base32-栅栏-凯撒获取flag</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210913151921.png" alt="20210913151921"></p>
@@ -555,7 +558,7 @@ im<span class="token punctuation">.</span>save<span class="token punctuation">(<
 <li>联想到题目brainfun，想到了brainfuck的编码，同时题目描述这是混乱的</li>
 </ul>
 <p>因此思路就是提取A值，同时以RGB的顺序排列，最后解brainfuck</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 
 <span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
 <span class="token keyword">from</span> pybrainfuck <span class="token keyword">import</span> BrainFck
@@ -576,7 +579,7 @@ pixels<span class="token punctuation">.</span>sort<span class="token punctuation
 
 <span class="token comment"># Run the alpha values as Brainfuck</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> p <span class="token keyword">in</span> pixels<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-BrainFck<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> p <span class="token keyword">in</span> pixels<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+BrainFck<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">chr</span><span class="token punctuation">(</span>p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> p <span class="token keyword">in</span> pixels<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
 
 
 <p>相关题目:</p>
@@ -803,7 +806,7 @@ BrainFck<span class="token punctuation">(</span><span class="token punctuation">
 </li>
 <li>pngcalculate：根据CRC校验和计算图片的宽高</li>
 </ul>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">
+<pre class="language-python" data-language="python"><code class="language-python">
 ```python
 <span class="token keyword">import</span> os
 <span class="token keyword">import</span> binascii
@@ -816,20 +819,20 @@ misc <span class="token operator">=</span> <span class="token builtin">open</spa
     data <span class="token operator">=</span> misc<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">:</span><span class="token number">16</span><span class="token punctuation">]</span> <span class="token operator">+</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'>i'</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token operator">+</span> misc<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">:</span><span class="token number">29</span><span class="token punctuation">]</span>
     crc32 <span class="token operator">=</span> binascii<span class="token punctuation">.</span>crc32<span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xffffffff</span>
     <span class="token keyword">if</span> crc32 <span class="token operator">==</span> <span class="token number">0x932f8a6b</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span> i<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">print</span> i</code></pre>
 
 <h4 id="例题-evalheight"><a href="#例题-evalheight" class="headerlink" title="例题-evalheight"></a>例题-evalheight</h4><p>根据题目名称肯定是修改高度了,这里展示一下多种工具的使用.<br>magnetos：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">what_steg <span class="token parameter variable">-f</span> Evalheight.png
+<pre class="language-bash" data-language="bash"><code class="language-bash">what_steg <span class="token parameter variable">-f</span> Evalheight.png
 <span class="token punctuation">..</span>.
 <span class="token punctuation">[</span>*<span class="token punctuation">]</span> PNG图片宽高CRC32校验失败，文件宽高被修改过
 <span class="token punctuation">[</span>*<span class="token punctuation">]</span> 尝试爆破图片高度
 <span class="token punctuation">[</span>*<span class="token punctuation">]</span> 找到正确的图片高度: <span class="token number">350</span>
 <span class="token punctuation">[</span>*<span class="token punctuation">]</span> 保存修正高度后的文件: fix_height.png
-<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">..</span>.</code></pre>
 
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927140005.png" alt="20210927140005"></p>
 <p>pngcheck&amp;pngcalculate</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pngcheck <span class="token parameter variable">-p</span> Evalheight.png
+<pre class="language-bash" data-language="bash"><code class="language-bash">pngcheck <span class="token parameter variable">-p</span> Evalheight.png
 File: Evalheight.png <span class="token punctuation">(</span><span class="token number">92446</span> bytes<span class="token punctuation">)</span>
 Evalheight.png  CRC error <span class="token keyword">in</span> chunk IHDR <span class="token punctuation">(</span>computed ca422c59, expected 52056cd4<span class="token punctuation">)</span>
 ERROR: Evalheight.png
@@ -838,14 +841,14 @@ python3 pngcal.py
 <span class="token number">430</span> <span class="token number">350</span>
 hex: 0x1ae 0x15e
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>然后在010editor里面手动修改即可</p>
 <h4 id="例题-realme"><a href="#例题-realme" class="headerlink" title="例题-realme"></a>例题-realme</h4><p>打开题目发现文件头是损坏的<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927230737.png" alt="20210927230737"></p>
 <p>修复了之后发现文件的宽高也与crc的校验和不匹配，因此计算真实的宽、高</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#通过pngcal计算出宽高的值，然后利用010editor修改获取flag</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#通过pngcal计算出宽高的值，然后利用010editor修改获取flag</span>
 09 <span class="token number">760</span>
 hex: 0x2c5 0x2f8
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927234257.png" alt="20210927234257"></p>
 <h3 id="PLTE"><a href="#PLTE" class="headerlink" title="PLTE"></a>PLTE</h3><p>调色板数据块 PLTE（palette chunk）：它包含有与索引彩色图像（indexed-color image）相关的彩色变换数据，它仅与索引彩色图像有关，而且要放在图像数据块（image data<br>chunk）之前。真彩色的 PNG 数据流也可以有调色板数据块，目的是便于非真彩色显示程序用它来量化图像数据，从而显示该图像。</p>
 <h3 id="IDAT"><a href="#IDAT" class="headerlink" title="IDAT"></a>IDAT</h3><p>图像数据块 IDAT（image data chunk）：它存储实际的数据，在数据流中可包含多个连续顺序的图像数据块。</p>
@@ -857,7 +860,7 @@ hex: 0x2c5 0x2f8
 </ul>
 <p>值得注意的是，IDAT 块只有当上一个块充满时，才会继续一个新的块。</p>
 <p>用 <code>pngcheck</code> 去查看此 PNG 文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">λ .<span class="token punctuation">\</span>pngcheck.exe <span class="token parameter variable">-v</span> sctf.png
+<pre class="language-bash" data-language="bash"><code class="language-bash">λ .<span class="token punctuation">\</span>pngcheck.exe <span class="token parameter variable">-v</span> sctf.png
 File: sctf.png <span class="token punctuation">(</span><span class="token number">1421461</span> bytes<span class="token punctuation">)</span>
   chunk IHDR at offset 0x0000c, length <span class="token number">13</span>
     <span class="token number">1000</span> x <span class="token number">562</span> image, <span class="token number">32</span>-bit RGB+alpha, non-interlaced
@@ -872,18 +875,18 @@ File: sctf.png <span class="token punctuation">(</span><span class="token number
   chunk IDAT at offset 0x150008, length <span class="token number">45027</span>
   chunk IDAT at offset 0x15aff7, length <span class="token number">138</span>
   chunk IEND at offset 0x15b08d, length <span class="token number">0</span>
-No errors detected <span class="token keyword">in</span> sctf.png <span class="token punctuation">(</span><span class="token number">28</span> chunks, <span class="token number">36.8</span>% compression<span class="token punctuation">)</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+No errors detected <span class="token keyword">in</span> sctf.png <span class="token punctuation">(</span><span class="token number">28</span> chunks, <span class="token number">36.8</span>% compression<span class="token punctuation">)</span>.</code></pre>
 
 <p>可以看到，正常的块的 length 是在 65524 的时候就满了，而倒数第二个 IDAT 块长度是 45027，最后一个长度是 138，很明显最后一个 IDAT 块是有问题的，因为他本来应该并入到倒数第二个未满的块里.</p>
 <p>利用 <code>python zlib</code> 解压多余 IDAT 块的内容，此时注意剔除 <strong>长度、数据块类型及末尾的CRC校验值</strong>。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> zlib
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> zlib
 <span class="token keyword">import</span> binascii
 IDAT <span class="token operator">=</span> <span class="token string">"789...667"</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span>
 result <span class="token operator">=</span> binascii<span class="token punctuation">.</span>hexlify<span class="token punctuation">(</span>zlib<span class="token punctuation">.</span>decompress<span class="token punctuation">(</span>IDAT<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span> result<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span> result</code></pre>
 
 <h3 id="IEND"><a href="#IEND" class="headerlink" title="IEND"></a>IEND</h3><p>图像结束数据 IEND（image trailer chunk）：它用来标记 PNG 文件或者数据流已经结束，并且必须要放在文件的尾部。</p>
-<pre class="line-numbers language-none"><code class="language-none">00 00 00 00 49 45 4E 44 AE 42 60 82<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-none"><code class="language-none">00 00 00 00 49 45 4E 44 AE 42 60 82</code></pre>
 
 <p>IEND 数据块的长度总是 <code>00 00 00 00</code>，数据标识总是 IEND <code>49 45 4E 44</code>，因此，CRC 码也总是 <code>AE 42 60 82</code>。</p>
 <p>这里是可以隐藏数据的，解法也很简单，使用工具、010editor等都可以获取。</p>
@@ -908,13 +911,13 @@ result <span class="token operator">=</span> binascii<span class="token punctuat
 <p>如果是要寻找这种 LSB 隐藏痕迹的话，有一个工具 <a target="_blank" rel="noopener" href="http://www.caesum.com/handbook/Stegsolve.jar">Stegsolve</a> 是个神器，可以来辅助我们进行分析。</p>
 <p>LSB 的信息借助于 Stegsolve 查看各个通道时一定要细心捕捉异常点，抓住 LSB 隐写的蛛丝马迹。</p>
 <h3 id="例题-lshhiddenplus1-lshhiddenplus"><a href="#例题-lshhiddenplus1-lshhiddenplus" class="headerlink" title="例题-lshhiddenplus1&amp;lshhiddenplus"></a>例题-lshhiddenplus1&amp;lshhiddenplus</h3><p>使用magnetos进行分析，在输出结果里发现这么一个压缩包<br>解压之后发现是一个elf文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">file</span> <span class="token number">1</span>
-<span class="token number">1</span>: ELF <span class="token number">64</span>-bit LSB executable, x86-64, version <span class="token number">1</span> <span class="token punctuation">(</span>SYSV<span class="token punctuation">)</span>, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="token keyword">for</span> GNU/Linux <span class="token number">2.6</span>.24, BuildID<span class="token punctuation">[</span>sha1<span class="token punctuation">]</span><span class="token operator">=</span>8df45089fa39fec83423ec37a944e81065d16bee, not stripped<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">file</span> <span class="token number">1</span>
+<span class="token number">1</span>: ELF <span class="token number">64</span>-bit LSB executable, x86-64, version <span class="token number">1</span> <span class="token punctuation">(</span>SYSV<span class="token punctuation">)</span>, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="token keyword">for</span> GNU/Linux <span class="token number">2.6</span>.24, BuildID<span class="token punctuation">[</span>sha1<span class="token punctuation">]</span><span class="token operator">=</span>8df45089fa39fec83423ec37a944e81065d16bee, not stripped</code></pre>
 <p>运行获取flag</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Desktop<span class="token punctuation">]</span> <span class="token function">chmod</span> +x <span class="token number">1</span>                                                        
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Desktop<span class="token punctuation">]</span> <span class="token function">chmod</span> +x <span class="token number">1</span>                                                        
 <span class="token punctuation">[</span>Desktop<span class="token punctuation">]</span> ./1                                                               
 hctf<span class="token punctuation">&#123;</span>dd0gf4c3tok3yb0ard4g41n~~~<span class="token punctuation">&#125;</span><span class="token comment">#  </span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>另一种方法是借助 <code>Stegsolve--&gt;Analyse--&gt;Data Extract</code> 可以指定通道进行提取。</p>
 <p>可以发现 <code>zip</code> 头，用 <code>save bin</code> 保存为压缩包后，打开运行其中的 ELF 文件就可以得到最后的 flag。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927164819.png" alt="20210927164819"></p>
@@ -969,7 +972,7 @@ hctf<span class="token punctuation">&#123;</span>dd0gf4c3tok3yb0ard4g41n~~~<span
 <p>一些常见的段类型<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/jpgformat.png" alt="jpgformat"></p>
 <p><code>0xffd8</code> 和 <code>0xffd9</code>为 JPG 文件的开始结束的标志。</p>
 <h2 id="隐写软件"><a href="#隐写软件" class="headerlink" title="隐写软件"></a>隐写软件</h2><h3 id="Stegdetect"><a href="#Stegdetect" class="headerlink" title="Stegdetect"></a><a target="_blank" rel="noopener" href="https://github.com/redNixon/stegdetect">Stegdetect</a></h3><p>通过统计分析技术评估 JPEG 文件的 DCT 频率系数的隐写工具, 可以检测到通过 JSteg、JPHide、OutGuess、Invisible<br>Secrets、F5、appendX 和 Camouflage 等这些隐写工具隐藏的信息，并且还具有基于字典暴力破解密码方法提取通过 Jphide、outguess 和 jsteg-shell 方式嵌入的隐藏信息。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token parameter variable">-q</span> 仅显示可能包含隐藏内容的图像。
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token parameter variable">-q</span> 仅显示可能包含隐藏内容的图像。
 <span class="token parameter variable">-n</span> 启用检查JPEG文件头功能，以降低误报率。如果启用，所有带有批注区域的文件将被视为没有被嵌入信息。如果JPEG文件的JFIF标识符中的版本号不是1.1，则禁用OutGuess检测。
 <span class="token parameter variable">-s</span> 修改检测算法的敏感度，该值的默认值为1。检测结果的匹配度与检测算法的敏感度成正比，算法敏感度的值越大，检测出的可疑文件包含敏感信息的可能性越大。
 <span class="token parameter variable">-d</span> 打印带行号的调试信息。
@@ -977,7 +980,7 @@ hctf<span class="token punctuation">&#123;</span>dd0gf4c3tok3yb0ard4g41n~~~<span
 j 检测图像中的信息是否是用jsteg嵌入的。
 o 检测图像中的信息是否是用outguess嵌入的。
 p 检测图像中的信息是否是用jphide嵌入的。
-i 检测图像中的信息是否是用invisible secrets嵌入的。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+i 检测图像中的信息是否是用invisible secrets嵌入的。</code></pre>
 
 <h3 id="JPHS"><a href="#JPHS" class="headerlink" title="JPHS"></a><a target="_blank" rel="noopener" href="http://linux01.gwdg.de/~alatham/stego.html">JPHS</a></h3><p>JPEG 图像的信息隐藏软件 JPHS，它是由 Allan Latham 开发设计实现在 Windows 和 Linux 系统平台针对有损压缩 JPEG 文件进行信息加密隐藏和探测提取的工具。软件里面主要包含了两个程序 JPHIDE和 JPSEEK。JPHIDE 程序主要是实现将信息文件加密隐藏到 JPEG 图像功能，而 JPSEEK 程序主要实现从用 JPHIDE 程序加密隐藏得到的 JPEG 图像探测提取信息文件，Windows 版本的 JPHS 里的 JPHSWIN 程序具有图形化操作界面且具备 JPHIDE 和 JPSEEK 的功能。</p>
 <h3 id="SilentEye"><a href="#SilentEye" class="headerlink" title="SilentEye"></a><a target="_blank" rel="noopener" href="http://silenteye.v1kings.io/">SilentEye</a></h3><blockquote>
@@ -1012,9 +1015,9 @@ i 检测图像中的信息是否是用invisible secrets嵌入的。<span aria-hi
 <p>更多参见 <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/df52f1511cf8">gif 格式图片详细解析</a></p>
 <h2 id="空间轴"><a href="#空间轴" class="headerlink" title="空间轴"></a>空间轴</h2><p>由于GIF的动态特性，由一帧帧的图片构成，所以每一帧的图片，多帧图片间的结合，都成了隐藏信息的一种载体。</p>
 <p>对于需要分离的GIF文件,可以使用<code>convert</code>命令将其每一帧分割开来</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">convert cake.gif cake.png
+<pre class="language-bash" data-language="bash"><code class="language-bash">convert cake.gif cake.png
 <span class="token function">ls</span>
-cake-0.png cake-1.png cake-2.png cake-3.png cake.gif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+cake-0.png cake-1.png cake-2.png cake-3.png cake.gif</code></pre>
 
 <h3 id="例题-cake"><a href="#例题-cake" class="headerlink" title="例题-cake"></a>例题-cake</h3><blockquote>
 <p>WDCTF-2017:3-2</p>
@@ -1029,7 +1032,7 @@ cake-0.png cake-1.png cake-2.png cake-3.png cake.gif<span aria-hidden="true" cla
 <p>例如在当时在XMan选拔赛出的一题</p>
 <h3 id="例题-XMAN-2017-100-gif"><a href="#例题-XMAN-2017-100-gif" class="headerlink" title="例题-XMAN-2017:100.gif"></a>例题-XMAN-2017:100.gif</h3><p>打开发现gif文件损坏，用010editor打开，发现缺少了文件头</p>
 <p>通过<code>identify</code>命令清晰的打印出每一帧的时间间隔</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ identify <span class="token parameter variable">-format</span> <span class="token string">"%s %T <span class="token entity" title="\n">\n</span>"</span> <span class="token number">100</span>.gif
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ identify <span class="token parameter variable">-format</span> <span class="token string">"%s %T <span class="token entity" title="\n">\n</span>"</span> <span class="token number">100</span>.gif
 <span class="token number">0</span> <span class="token number">66</span>
 <span class="token number">1</span> <span class="token number">66</span>
 <span class="token number">2</span> <span class="token number">20</span>
@@ -1045,13 +1048,13 @@ cake-0.png cake-1.png cake-2.png cake-3.png cake.gif<span aria-hidden="true" cla
 <span class="token number">12</span> <span class="token number">20</span>
 <span class="token number">13</span> <span class="token number">20</span>
 <span class="token number">14</span> <span class="token number">10</span>
-<span class="token number">15</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token number">15</span> <span class="token number">10</span></code></pre>
 
 <p>推断 <code>20 &amp; 10</code>  分别代表 <code>0 &amp; 1</code>，提取每一帧间隔并进行转化。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">cat</span> flag<span class="token operator">|</span><span class="token function">cut</span> <span class="token parameter variable">-d</span> <span class="token string">' '</span> <span class="token parameter variable">-f</span> <span class="token number">2</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'66'</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'\n'</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'0'</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token string">'2'</span> <span class="token string">'0'</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">cat</span> flag<span class="token operator">|</span><span class="token function">cut</span> <span class="token parameter variable">-d</span> <span class="token string">' '</span> <span class="token parameter variable">-f</span> <span class="token number">2</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'66'</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'\n'</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'0'</span><span class="token operator">|</span><span class="token function">tr</span> <span class="token string">'2'</span> <span class="token string">'0'</span>
 
 <span class="token comment">#查看flag文件，以空格为分隔符，显示第二部分，删除66，删除换行，删除0，把2转换为0</span>
-0101100001001101010000010100111001111011001110010011011000110101001101110011010101100010011001010110010101100100001101000110010001100101011000010011000100111000011001000110010101100100001101000011011100110011001101010011011000110100001100110110000101100101011000110110011001100001001100110011010101111101<span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+0101100001001101010000010100111001111011001110010011011000110101001101110011010101100010011001010110010101100100001101000110010001100101011000010011000100111000011001000110010101100100001101000011011100110011001101010011011000110100001100110110000101100101011000110110011001100001001100110011010101111101<span class="token comment">#</span></code></pre>
 
 <p>最后转 ASCII 码得到 flag。</p>
 <h2 id="隐写软件-1"><a href="#隐写软件-1" class="headerlink" title="隐写软件"></a>隐写软件</h2><ul>
@@ -1336,6 +1339,9 @@ cake-0.png cake-1.png cake-2.png cake-3.png cake.gif<span aria-hidden="true" cla
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

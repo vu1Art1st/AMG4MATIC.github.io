@@ -408,6 +408,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -417,7 +420,7 @@
 <h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p>打开题目附件流量包，在短信里面获取flag{IC7856@qwe}<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210830142354.png" alt="20210830142354"></p>
 <h2 id="0x02-可疑的文件"><a href="#0x02-可疑的文件" class="headerlink" title="0x02 可疑的文件"></a>0x02 可疑的文件</h2><h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>一天，运维小明在使用电脑时，突然蓝屏了，当小明再次打开电脑时，桌面上突然多了一个可疑的文件，正当小明准备查看时，电脑再次蓝屏，小明立刻将硬盘拔下来并保存。你能帮助小明查看一下文件的内容是什么吗？答案格式：flag{****************}</p>
 <h3 id="解题过程-1"><a href="#解题过程-1" class="headerlink" title="解题过程"></a>解题过程</h3><p>打开题目附件可以看到是个raw文件，因此使用volatility进行分析</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#使用volatility进行内存分析的时候，首先要判断这是从什么操作系统里面dump出的内存</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#使用volatility进行内存分析的时候，首先要判断这是从什么操作系统里面dump出的内存</span>
 $ volatility imageinfo <span class="token parameter variable">-f</span> test-20201029-020458.raw
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>
 INFO    <span class="token builtin class-name">:</span> volatility.debug    <span class="token builtin class-name">:</span> Determining profile based on KDBG search<span class="token punctuation">..</span>.
@@ -433,11 +436,11 @@ INFO    <span class="token builtin class-name">:</span> volatility.debug    <spa
              KUSER_SHARED_DATA <span class="token builtin class-name">:</span> 0xffdf0000L
            Image <span class="token function">date</span> and <span class="token function">time</span> <span class="token builtin class-name">:</span> <span class="token number">2020</span>-10-29 02:05:01 UTC+0000
      Image <span class="token builtin class-name">local</span> <span class="token function">date</span> and <span class="token function">time</span> <span class="token builtin class-name">:</span> <span class="token number">2020</span>-10-29 <span class="token number">10</span>:05:01 +0800
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <p>可以看到这是一个xp系统里dump出来的内存，接下来的分析里指定xp进行分析。各种插件的用法可以参考<a target="_blank" rel="noopener" href="https://github.com/volatilityfoundation/volatility/wiki/Command-Reference">官方wiki</a></p>
 <p>这里在查看IE浏览器缓存的时候发现了flag.png这个东西，因此先把这个dump出来</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ volatility <span class="token parameter variable">-f</span> test-20201029-020458.raw <span class="token parameter variable">--profile</span><span class="token operator">=</span>WinXPSP2x86 iehistory
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ volatility <span class="token parameter variable">-f</span> test-20201029-020458.raw <span class="token parameter variable">--profile</span><span class="token operator">=</span>WinXPSP2x86 iehistory
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>
 **************************************************
 Process: <span class="token number">1436</span> explorer.exe
@@ -453,19 +456,19 @@ Volatility Foundation Volatility Framework <span class="token number">2.6</span>
 0x00000000010e3740      <span class="token number">1</span>      <span class="token number">0</span> R--r-- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Documents and Settings<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>桌面<span class="token punctuation">\</span>flag.png
 0x000000000265e318      <span class="token number">1</span>      <span class="token number">0</span> RW-rw- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Documents and Settings<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>Recent<span class="token punctuation">\</span>flag.lnk
 
-$ volatility <span class="token parameter variable">-f</span> test-20201029-020458.raw <span class="token parameter variable">--profile</span><span class="token operator">=</span>WinXPSP2x86 dumpfiles <span class="token parameter variable">-Q</span> 0x00000000010e3740 <span class="token parameter variable">-D</span> ./<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+$ volatility <span class="token parameter variable">-f</span> test-20201029-020458.raw <span class="token parameter variable">--profile</span><span class="token operator">=</span>WinXPSP2x86 dumpfiles <span class="token parameter variable">-Q</span> 0x00000000010e3740 <span class="token parameter variable">-D</span> ./</code></pre>
 <p>dump完以后发现图片的内容是32个CRC，也是就是说CRC32。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210823135310.png" alt="20210823135310"></p>
 <p>这里需要脑洞一下ZIP压缩包的CRC爆破，因此下一步就是找可疑的zip压缩包</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> volatility <span class="token parameter variable">-f</span> test-20201029-020458.raw <span class="token parameter variable">--profile</span><span class="token operator">=</span>WinXPSP2x86 filescan <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">'zip'</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash"> volatility <span class="token parameter variable">-f</span> test-20201029-020458.raw <span class="token parameter variable">--profile</span><span class="token operator">=</span>WinXPSP2x86 filescan <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">'zip'</span>
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>
 0x000000000076ee58      <span class="token number">1</span>      <span class="token number">0</span> R--rw- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>WINDOWS<span class="token punctuation">\</span>system32<span class="token punctuation">\</span>zipfldr.dll
 0x0000000001137028      <span class="token number">1</span>      <span class="token number">0</span> R--rw- <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>Documents and Settings<span class="token punctuation">\</span>Administrator<span class="token punctuation">\</span>桌面<span class="token punctuation">\</span>Desktop.zip
-0x0000000006de9b10      <span class="token number">1</span>      <span class="token number">0</span> R--r-d <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>WINDOWS<span class="token punctuation">\</span>system32<span class="token punctuation">\</span>zipfldr.dll<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+0x0000000006de9b10      <span class="token number">1</span>      <span class="token number">0</span> R--r-d <span class="token punctuation">\</span>Device<span class="token punctuation">\</span>HarddiskVolume1<span class="token punctuation">\</span>WINDOWS<span class="token punctuation">\</span>system32<span class="token punctuation">\</span>zipfldr.dll</code></pre>
 <p>可以看到的是题目比较良心，就搞了一个zip，dump出来看一下。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210823145411.png" alt="20210823145411"></p>
 <p>可以看到一堆4字节大小的txt文件，因此可以确定就是crc的爆破，爆破得flag，脚本如下：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#coding:utf-8</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#coding:utf-8</span>
 <span class="token keyword">import</span> zipfile
 <span class="token keyword">import</span> string
 <span class="token keyword">import</span> binascii
@@ -495,7 +498,7 @@ dic <span class="token operator">=</span> string<span class="token punctuation">
 
 f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'flag.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span>
 CrackZip<span class="token punctuation">(</span><span class="token punctuation">)</span>
-f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 
 <h2 id="0x04-应急红绿灯"><a href="#0x04-应急红绿灯" class="headerlink" title="0x04 应急红绿灯"></a>0x04 应急红绿灯</h2><h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>某路口红绿灯故障启用应急红绿灯灯，南北方向绿灯Q0.0，黄灯Q0.1，红灯Q0.2，东西方向红灯Q0.5，绿灯Q0.3，黄灯Q0.4。按下I0.0启动，按下I0.1停止。由于红绿灯故障引起堵车，东西方向绿灯常亮每秒3辆，南北方向每秒4辆，绿灯闪烁路口通行车辆每秒较常亮减少1辆，黄灯闪烁通行车辆较绿灯常亮每秒减少2辆，启动应急红绿灯后每15秒统计一次路口车辆通过数据，1分钟内车辆通行情况。 东西方向用W 南北方向用N 如前15秒东西通行30 南北通行 20 W30N20 车辆均已两位表示，一辆用01表示。答案格式：flag{****************}</p>
 <h2 id="解题过程-2"><a href="#解题过程-2" class="headerlink" title="解题过程"></a>解题过程</h2><p>打开题目是一个S7-200的梯形图，所以需要逐行的分析<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210823163117.png" alt="20210823163117"></p>
@@ -541,7 +544,7 @@ f<span class="token punctuation">.</span>close<span class="token punctuation">(<
 <h2 id="0x06-Modbus流量包"><a href="#0x06-Modbus流量包" class="headerlink" title="0x06 Modbus流量包"></a>0x06 Modbus流量包</h2><h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>在工控网络通信中，工作人员截取了一段奇怪的Modbus流量，请分析该流量包中隐藏的数据。答案格式：flag{****************} flag格式：flag{}。</p>
 <h2 id="解题过程-3"><a href="#解题过程-3" class="headerlink" title="解题过程"></a>解题过程</h2><p>根据题目描述我们首先筛选modbus协议，发现全部是写入数据，并data区域全部有数据<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210824113847.png" alt="20210824113847"><br>那么追踪一下tcp流，发现了异常可以看到明文字符里出现了PNGIHDR，一个典型的png图片头<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210824113732.png" alt="20210824113732"></p>
 <p>那么下一步思路也就清晰了，提数据转图片,脚本如下</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 <span class="token keyword">import</span> os
 <span class="token keyword">import</span> binascii
 
@@ -555,15 +558,15 @@ data1<span class="token punctuation">.</span>close<span class="token punctuation
 f<span class="token operator">=</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'flag.png'</span><span class="token punctuation">,</span><span class="token string">"wb+"</span><span class="token punctuation">)</span> <span class="token comment"># filepath为你要存储的图片的全路径</span>
 pic <span class="token operator">=</span> binascii<span class="token punctuation">.</span>a2b_hex<span class="token punctuation">(</span>tmp<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>pic<span class="token punctuation">)</span>
-f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/flag.png" alt="flag"></p>
 <h2 id="0x11-工业协议分析"><a href="#0x11-工业协议分析" class="headerlink" title="0x11 工业协议分析"></a>0x11 工业协议分析</h2><h3 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h3><p>通过分析流量包中的工业协议查询隐藏的flag。答案格式：flag{****************}</p>
 <p>##解题过程<br>打开流量包，筛选modbus协议，追踪tcp流，解base64获取flag<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210824115552.png" alt="20210824115552"></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">import</span> base64
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">import</span> base64
 <span class="token operator">>></span><span class="token operator">></span> flag<span class="token operator">=</span>base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span><span class="token string">'ZmxhZ3s2N2Y1YjgyNTcyNzIwOTI1fQ=='</span><span class="token punctuation">)</span>
 <span class="token operator">>></span><span class="token operator">></span> <span class="token keyword">print</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
 <span class="token string">b'flag&#123;67f5b82572720925&#125;'</span>
-<span class="token operator">>></span><span class="token operator">></span> exit<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">>></span><span class="token operator">></span> exit<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
                 
             </div>
             <hr/>
@@ -715,19 +718,19 @@ f<span class="token punctuation">.</span>close<span class="token punctuation">(<
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/computertips/ha-xi-hash-ji-suan/">
+                <a href="/linux/linux-xi-tong-an-zhuang-oh-my-zsh/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="哈希(hash)计算">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Linux系统安装oh-my-zsh">
                         
-                        <span class="card-title">哈希(hash)计算</span>
+                        <span class="card-title">Linux系统安装oh-my-zsh</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            hash计算是我们经常需要用到的命令，这里每个系统做个记录
+                            Linux系统安装oh-my-zsh
                         
                     </div>
                     <div class="publish-info">
@@ -738,8 +741,8 @@ f<span class="token punctuation">.</span>close<span class="token punctuation">(<
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/ComputerTips/" class="post-category">
-                                    ComputerTips
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
@@ -749,12 +752,8 @@ f<span class="token punctuation">.</span>close<span class="token punctuation">(<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ComputerTips/">
-                        <span class="chip bg-color">ComputerTips</span>
-                    </a>
-                    
-                    <a href="/tags/Hash/">
-                        <span class="chip bg-color">Hash</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
@@ -825,6 +824,9 @@ f<span class="token punctuation">.</span>close<span class="token punctuation">(<
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

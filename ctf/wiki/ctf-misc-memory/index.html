@@ -408,6 +408,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -445,12 +448,12 @@
 <p>VMDK：（VMWare Virtual Machine Disk Format）是虚拟机VMware创建的虚拟硬盘格式，文件存在于VMware文件系统中，被称为VMFS（虚拟机文件系统）,可以用7z打开</p>
 </blockquote>
 <p>拿到<code>encrypt.vmdk</code>这个文件首先想到的就是做内存分析或者恢复虚拟机,但是这里使用volatility分析失败。虚拟机创建也失败。</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f encrypt.vmdk imageinfo
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f encrypt.vmdk imageinfo
 Volatility Foundation Volatility Framework 2.6.1
 INFO    : volatility.debug    : Determining profile based on KDBG search...
           Suggested Profile(s) : No suggestion (Instantiated with no profile)
                      AS Layer1 : FileAddressSpace (&#x2F;Users&#x2F;...&#x2F;encrypt.vmdk)
-                      PAE type : No PAE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                      PAE type : No PAE</code></pre>
 <p>于是用010editor打开，在中部发现了大量重复字符。<code>rctf&#123;unseCure_quick_form4t_vo1ume</code><br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025151437.png" alt="20211025151437"></p>
 <p>这里获取了前半段flag之后我们就需要找后半段了，接着用7z提取出来<code>0.FAT</code><br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025152108.png" alt="20211025152108"></p>
 <p>下面是另外一个知识了</p>
@@ -466,7 +469,7 @@ INFO    : volatility.debug    : Determining profile based on KDBG search...
 <p>这里我们挂载成功以后发现打不开<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025153534.png" alt="20211025153534"></p>
 <p>这里选择Winhex打开磁盘<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025154425.png" alt="20211025154425"><br>获取后半段flag<code>_and_corrupted_1nner_v0lume&#125;_and_corrupted_1nner_v0lume&#125;</code></p>
 <h2 id="例题-find-secret"><a href="#例题-find-secret" class="headerlink" title="例题-find_secret"></a>例题-find_secret</h2><p>拿到这个题目，首先确定一下内存的类型</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f 2.data imageinfo
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f 2.data imageinfo
 Volatility Foundation Volatility Framework 2.6.1
 INFO    : volatility.debug    : Determining profile based on KDBG search...
           Suggested Profile(s) : WinXPSP1x64, Win2003SP1x64, WinXPSP2x64, Win2003SP2x64
@@ -481,20 +484,20 @@ INFO    : volatility.debug    : Determining profile based on KDBG search...
                 KPCR for CPU 1 : 0xfffffadff5a6b000L
              KUSER_SHARED_DATA : 0xfffff78000000000L
            Image date and time : 2019-08-17 07:30:53 UTC+0000
-     Image local date and time : 2019-08-17 15:30:53 +0800<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+     Image local date and time : 2019-08-17 15:30:53 +0800</code></pre>
 
 <p>确定了镜像类型以后，我们常用的几个插件有 <code>cmdline</code>，<code>filesacn</code>，<code>psscan</code>，<code>memdump</code>，<code>dumpfiles</code>等几个插件。</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f 2.data --profile&#x3D;WinXPSP1x64 cmdline
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f 2.data --profile&#x3D;WinXPSP1x64 cmdline
 Volatility Foundation Volatility Framework 2.6.1
 *********************************************************
 
 pythonw.exe pid:   2364
 Command line : &quot;C:\Python34\pythonw.exe&quot;  &quot;C:\Python34\Lib\idlelib\idle.pyw&quot; -e &quot;C:\Documents and Settings\Administrator\桌面\create_secret.py&quot;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <p>通过cmdline我们发现了<code>create_secret.py</code>这么个东西，因此我们接着用<code>filescan</code></p>
 <p>这个时候问题来了</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f 2.data --profile&#x3D;WinXPSP1x64 filescan|grep 桌面
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f 2.data --profile&#x3D;WinXPSP1x64 filescan|grep 桌面
 Volatility Foundation Volatility Framework 2.6.1
 0x0000000005a5b3f0      1      1 R--rw- \Device\HarddiskVolume1\Documents and Settings\Administrator\桌面
 0x0000000005accb90      3      1 R--rwd \Device\HarddiskVolume1\Documents and Settings\All Users\桌面
@@ -505,13 +508,13 @@ Volatility Foundation Volatility Framework 2.6.1
 volatility -f 2.data --profile&#x3D;WinXPSP1x64 dumpfiles -Q 0x0000000005acec10 -D .
 Volatility Foundation Volatility Framework 2.6.1
 DataSectionObject 0x05acec10   None   \Device\HarddiskVolume1\Documents and Settings\Administrator\桌面\lalala.secret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>导出来之后呢其实就获取了加密脚本输出的内容</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">c1IufV1PRUZOX1VtTyYiIE9BRXJxeyZSWyRVc0MmIiJPQS52cU9FUkN6XXVyQlJ7c1JFQHJBI3xGeWNzcXtnL3QkZyNccCoq<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-console" data-language="console"><code class="language-console">c1IufV1PRUZOX1VtTyYiIE9BRXJxeyZSWyRVc0MmIiJPQS52cU9FUkN6XXVyQlJ7c1JFQHJBI3xGeWNzcXtnL3QkZyNccCoq</code></pre>
 
 <p>但是我们只在桌面发现了一个由python脚本生成的加密文件，加密脚本怎么获取呢</p>
 <p>注意到这个脚本是由<code>pythonw.exe</code>运行了的，因此考虑使用<code>memdump</code></p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f 2.data --profile&#x3D;WinXPSP1x64 psscan|grep python
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f 2.data --profile&#x3D;WinXPSP1x64 psscan|grep python
 Volatility Foundation Volatility Framework 2.6.1
 0x0000000005a79040 pythonw.exe        2412   2364 0x000000000dc1c000 2019-08-17 07:30:40 UTC+0000
 0x000000000b03d040 pythonw.exe        2364   1460 0x0000000008048000 2019-08-17 07:30:31 UTC+0000
@@ -519,12 +522,12 @@ Volatility Foundation Volatility Framework 2.6.1
 volatility -f 2.data --profile&#x3D;WinXPSP1x64 memdump -p 2364 -D .
 Volatility Foundation Volatility Framework 2.6.1
 ************************************************************************
-Writing pythonw.exe [  2364] to 2364.dmp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Writing pythonw.exe [  2364] to 2364.dmp</code></pre>
 
 <p>接下来就是从内存里面把create_secret.py，用010editor打开，因为我们已经知道了最终生成的文件是<code>lalala.secret</code>，因此我们直接搜索lalala</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211022153702.png" alt="20211022153702"></p>
 <p>最终我们在地址<code>990BC5h</code>获取脚本</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#/usr/bin/env python</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#/usr/bin/env python</span>
 <span class="token comment">#-*- coding:utf-8 -*-</span>
 <span class="token keyword">import</span> os
 <span class="token keyword">from</span> base64 <span class="token keyword">import</span> b64encode
@@ -554,13 +557,13 @@ result_path <span class="token operator">=</span> os<span class="token punctuati
 <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>result_path<span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
     f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>secret<span class="token punctuation">)</span>
 
-os<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+os<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
 
 <p>这里就清楚了，加密脚本一共进行了三次异或和base64编码的组合操作，最终获取flag</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211022160626.png" alt="20211022160626"></p>
 <p>这里我们重复三次就可以了，也可以通过这个发现了key是0x17，写个小脚本也可以</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211022161035.png" alt="20211022161035"></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 <span class="token keyword">from</span> base64 <span class="token keyword">import</span> b64decode
 cipher<span class="token operator">=</span><span class="token string">'c1IufV1PRUZOX1VtTyYiIE9BRXJxeyZSWyRVc0MmIiJPQS52cU9FUkN6XXVyQlJ7c1JFQHJBI3xGeWNzcXtnL3QkZyNccCoq'</span>
 
@@ -574,10 +577,10 @@ key <span class="token operator">=</span> <span class="token builtin">int</span>
         result <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span><span class="token builtin">ord</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token operator">^</span> key<span class="token punctuation">)</span>
     cipher <span class="token operator">=</span> result
     <span class="token keyword">print</span> cipher
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <h2 id="例题-easy-dump（2018护网杯）"><a href="#例题-easy-dump（2018护网杯）" class="headerlink" title="例题-easy_dump（2018护网杯）"></a>例题-easy_dump（2018护网杯）</h2><p>老规矩，volatility梭哈一波先</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">volatility <span class="token parameter variable">-f</span> easy_dump.img imageinfo
+<pre class="language-bash" data-language="bash"><code class="language-bash">volatility <span class="token parameter variable">-f</span> easy_dump.img imageinfo
 Volatility Foundation Volatility Framework <span class="token number">2.6</span>.1
 INFO    <span class="token builtin class-name">:</span> volatility.debug    <span class="token builtin class-name">:</span> Determining profile based on KDBG search<span class="token punctuation">..</span>.
           Suggested Profile<span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token builtin class-name">:</span> Win7SP1x64, Win7SP0x64, Win2008R2SP0x64, Win2008R2SP1x64_24000, Win2008R2SP1x64_23418, Win2008R2SP1x64, Win7SP1x64_24000, Win7SP1x64_23418
@@ -593,10 +596,10 @@ INFO    <span class="token builtin class-name">:</span> volatility.debug    <spa
            Image <span class="token function">date</span> and <span class="token function">time</span> <span class="token builtin class-name">:</span> <span class="token number">2018</span>-10-02 <span class="token number">13</span>:53:05 UTC+0000
      Image <span class="token builtin class-name">local</span> <span class="token function">date</span> and <span class="token function">time</span> <span class="token builtin class-name">:</span> <span class="token number">2018</span>-10-02 <span class="token number">21</span>:53:05 +0800
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <p>查看一下系统进程</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 psscan
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 psscan
 Volatility Foundation Volatility Framework 2.6.1
 Offset(P)          Name                PID   PPID PDB                Time created                   Time exited
 ------------------ ---------------- ------ ------ ------------------ ------------------------------ ------------------------------
@@ -639,15 +642,15 @@ Offset(P)          Name                PID   PPID PDB                Time create
 0x0000000024b47870 TPAutoConnect.     2548   2008 0x0000000018d3d000 2018-10-02 13:21:19 UTC+0000
 0x0000000024b48490 conhost.exe        2556    408 0x000000000fa02000 2018-10-02 13:21:19 UTC+0000
 0x00000000254b3b30 notepad.exe        2872   1244 0x0000000008151000 2018-10-02 13:26:51 UTC+0000
-0x0000000025749b30 System                4      0 0x0000000000187000 2018-10-02 13:21:03 UTC+0000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+0x0000000025749b30 System                4      0 0x0000000000187000 2018-10-02 13:21:03 UTC+0000</code></pre>
 
 <p>这里有两个进程<code>DumpIt.exe</code>和<code>notepad.exe</code>两个进程，对应着两种不同的思路。</p>
 <h3 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h3><p>把 <code>notepad.exe</code>dump出来</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 memdump -p 2872 -D .
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 memdump -p 2872 -D .
 Volatility Foundation Volatility Framework 2.6.1
 ************************************************************************
 Writing notepad.exe [  2872] to 2872.dmp
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025162259.png" alt="20211025162259"></p>
 <p>这里获取了提示，内存里面有一个图片</p>
@@ -655,22 +658,22 @@ Writing notepad.exe [  2872] to 2872.dmp
 <p>这里不知道为什么kali和mac里面的strings出来的结果不一样- -</p>
 </blockquote>
 <p>于是利用filescan获取了一张图片，并将其dump出来</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console"> volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 filescan|grep jpg
+<pre class="language-console" data-language="console"><code class="language-console"> volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 filescan|grep jpg
 Volatility Foundation Volatility Framework 2.6.1
-0x000000002557b2b0     32      0 RW---- \Device\HarddiskVolume1\phos.jpg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+0x000000002557b2b0     32      0 RW---- \Device\HarddiskVolume1\phos.jpg</code></pre>
 
 <p>使用binwalk进行分析</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">binwalk phos.jpg
+<pre class="language-console" data-language="console"><code class="language-console">binwalk phos.jpg
 
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
 0             0x0             JPEG image data, EXIF standard
 12            0xC             TIFF image data, little-endian offset of first image directory: 8
 2238922       0x2229CA        Zip archive data, at least v2.0 to extract, compressed size: 87797, uncompressed size: 1048576, name: message.img
-2326869       0x238155        End of Zip archive, footer length: 22<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+2326869       0x238155        End of Zip archive, footer length: 22</code></pre>
 
 <p>发现图片里有一个<code>message.img</code>，分离出来</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">binwalk -e -o 0x2229CA phos.jpg
+<pre class="language-console" data-language="console"><code class="language-console">binwalk -e -o 0x2229CA phos.jpg
 
 DECIMAL       HEXADECIMAL     DESCRIPTION
 --------------------------------------------------------------------------------
@@ -678,9 +681,9 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 2326869       0x238155        End of Zip archive, footer length: 22
 
 file message.img
-message.img: Linux rev 1.0 ext2 filesystem data, UUID&#x3D;34d27b8e-1aa5-441f-bfd9-bdc765cc4edd (large files)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+message.img: Linux rev 1.0 ext2 filesystem data, UUID&#x3D;34d27b8e-1aa5-441f-bfd9-bdc765cc4edd (large files)</code></pre>
 <p>发现是一个ext2的文件系统，在linux里面挂载，挂载之后发现了hint.txt</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">[Desktop] mkdir message                                                     
+<pre class="language-console" data-language="console"><code class="language-console">[Desktop] mkdir message                                                     
 [Desktop] id                                                                
 uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root),144(kaboxer)
 [Desktop] mount message.img .&#x2F;message                                       
@@ -692,7 +695,7 @@ drwxr-xr-x 3 root root   4096 Oct 25 17:04 ..
 -rw-r--r-- 1 root root 257163 Sep 28  2018 hint.txt
 drwx------ 2 root root  12288 Oct  1  2018 lost+found
 drwx------ 4 root root   1024 Oct  1  2018 .Trash-0
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025170826.png" alt="20211025170826"></p>
 <p>这里发现似乎是一个269x269的二维码坐标，这里根据坐标画图提供两种方法</p>
 <ul>
@@ -700,7 +703,7 @@ drwx------ 4 root root   1024 Oct  1  2018 .Trash-0
 </li>
 <li><p>方法二：python脚本</p>
 <ul>
-<li>脚本一：<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
+<li>脚本一：<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
 <span class="token keyword">import</span> Image
 MAX <span class="token operator">=</span> <span class="token number">32</span>
 pic <span class="token operator">=</span> Image<span class="token punctuation">.</span>new<span class="token punctuation">(</span><span class="token string">"RGB"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -718,9 +721,9 @@ a<span class="token operator">=</span><span class="token string">''</span>
     s<span class="token operator">=</span>f<span class="token punctuation">.</span>readline<span class="token punctuation">(</span><span class="token punctuation">)</span>
 f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
 pic<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
-pic<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"flag.png"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+pic<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">"flag.png"</span><span class="token punctuation">)</span></code></pre>
 <ul>
-<li>脚本二：<pre class="line-numbers language-python" data-language="python"><code class="language-python">    <span class="token comment">#脚本文件</span>
+<li>脚本二：<pre class="language-python" data-language="python"><code class="language-python">    <span class="token comment">#脚本文件</span>
 <span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
 <span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
 
@@ -735,7 +738,7 @@ datas <span class="token operator">=</span> f<span class="token punctuation">.</
     
 plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span><span class="token string">'ks'</span><span class="token punctuation">,</span>ms<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 根据提示我们去翻找一下垃圾箱，找到了<code>.message.swp</code>也就是vim中断后产生的文件<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211025171127.png" alt="20211025171127"></li>
 </ul>
 </li>
@@ -748,11 +751,11 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 <p>进入之后选择List，就会发现一个标红的<code>.message.swp</code>也就是提示中说到的删除的文件<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211026141323.png" alt="20211026141323"></p>
 <p>之后先按小写c再按一下大写C就可以复制出来了（注意版本和平台都可能影响选项）</p>
 <h3 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h3><p>思路二也就是通过dump<code>DumpIt.exe</code>这个进程来分析</p>
-<pre class="line-numbers language-console" data-language="console"><code class="language-console">volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 memdump -p 1056 -D .
+<pre class="language-console" data-language="console"><code class="language-console">volatility -f easy_dump.img --profile&#x3D;Win7SP1x64 memdump -p 1056 -D .
 
 Volatility Foundation Volatility Framework 2.6.1
 ************************************************************************
-Writing DumpIt.exe [  1056] to 1056.dmp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Writing DumpIt.exe [  1056] to 1056.dmp</code></pre>
 <p>使用binwalk分析的时候会发现有<code>message.img</code>这个文件<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211026144143.png" alt="20211026144143"></p>
 <p>使用foremost提取出来之后，这里采用了DiskGenius分析。可以达到与之前提到的在linux里面挂载一样的效果。<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20211026145528.png" alt="20211026145528"></p>
 <h2 id="待更新-2021祥云杯-层层取证；2020网鼎杯密码柜"><a href="#待更新-2021祥云杯-层层取证；2020网鼎杯密码柜" class="headerlink" title="待更新-2021祥云杯-层层取证；2020网鼎杯密码柜"></a>待更新-2021祥云杯-层层取证；2020网鼎杯密码柜</h2><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
@@ -1021,6 +1024,9 @@ Writing DumpIt.exe [  1056] to 1056.dmp<span aria-hidden="true" class="line-numb
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

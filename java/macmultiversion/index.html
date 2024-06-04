@@ -412,6 +412,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -424,38 +427,38 @@
 <p>官方链接目前提供8、11、16三个版本的下载。想下载6的话需要去<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase-java-archive-javase6-downloads.html">另一个链接</a>下载</p>
 <p>使用<code>homebrew</code>进行安装的话分为以下两种情况（brew会安装openjdk）：</p>
 <ul>
-<li>安装最新版的JDK<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew cask <span class="token function">install</span> <span class="token function">java</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>安装指定版本的JDK <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew tap homebrew/cask-versions
+<li>安装最新版的JDK<pre class="language-bash" data-language="bash"><code class="language-bash">brew cask <span class="token function">install</span> <span class="token function">java</span></code></pre></li>
+<li>安装指定版本的JDK <pre class="language-bash" data-language="bash"><code class="language-bash">brew tap homebrew/cask-versions
 brew search <span class="token function">java</span>
-brew <span class="token function">install</span> java*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+brew <span class="token function">install</span> java*</code></pre>
 然后根据搜索的结果进行安装</li>
 </ul>
-<h2 id="查看JDK安装路径"><a href="#查看JDK安装路径" class="headerlink" title="查看JDK安装路径"></a>查看JDK安装路径</h2>   <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/libexec/java_home <span class="token parameter variable">-V</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="查看JDK安装路径"><a href="#查看JDK安装路径" class="headerlink" title="查看JDK安装路径"></a>查看JDK安装路径</h2>   <pre class="language-bash" data-language="bash"><code class="language-bash">/usr/libexec/java_home <span class="token parameter variable">-V</span></code></pre>
 <p>  <img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210507090926.png" alt="20210507090926"><br>  如图，这里安装了java8和java16</p>
 <h2 id="多版本JDK管理-jEnv"><a href="#多版本JDK管理-jEnv" class="headerlink" title="多版本JDK管理-jEnv"></a>多版本JDK管理-jEnv</h2><blockquote>
 <p>jEnv的官网介绍说:”jEnv is a command line tool to help you forget how to set the JAVA_HOME environment variable” 一个帮助你忘却配置环境变量的工具</p>
 </blockquote>
-<h3 id="下载jEnv"><a href="#下载jEnv" class="headerlink" title="下载jEnv"></a>下载jEnv</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#git</span>
+<h3 id="下载jEnv"><a href="#下载jEnv" class="headerlink" title="下载jEnv"></a>下载jEnv</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#git</span>
 <span class="token function">git</span> clone https://github.com/jenv/jenv.git ~/.jenv
 <span class="token comment">#homebrew</span>
-brew <span class="token function">install</span> jenv<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="安装jEnv"><a href="#安装jEnv" class="headerlink" title="安装jEnv"></a>安装jEnv</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">'export PATH="$HOME/.jenv/bin:$PATH"'</span> <span class="token operator">>></span> ~/.zshrc
-<span class="token builtin class-name">echo</span> <span class="token string">'eval "$(jenv init -)"'</span> <span class="token operator">>></span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="配置jEnv"><a href="#配置jEnv" class="headerlink" title="配置jEnv"></a>配置jEnv</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> ~/.zshrc
+brew <span class="token function">install</span> jenv</code></pre>
+<h3 id="安装jEnv"><a href="#安装jEnv" class="headerlink" title="安装jEnv"></a>安装jEnv</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">'export PATH="$HOME/.jenv/bin:$PATH"'</span> <span class="token operator">>></span> ~/.zshrc
+<span class="token builtin class-name">echo</span> <span class="token string">'eval "$(jenv init -)"'</span> <span class="token operator">>></span> ~/.zshrc</code></pre>
+<h3 id="配置jEnv"><a href="#配置jEnv" class="headerlink" title="配置jEnv"></a>配置jEnv</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> ~/.zshrc
 /usr/libexec/java_home <span class="token parameter variable">-V</span>
-jenv <span class="token function">add</span> java_home<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+jenv <span class="token function">add</span> java_home</code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210507101244.png" alt="20210507101244"></p>
 <h3 id="使用jEnv"><a href="#使用jEnv" class="headerlink" title="使用jEnv"></a>使用jEnv</h3><p>jEnv常用的有三个参数global、local、shell<br>这里推荐用local按照目录进行管理，使用了local命令以后会在目录下生成一个<code>.java-version</code>的文件，只要不删除该文件，当前目录会使用采用文件配置的java版本<br>List managed JDKs</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv versions
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ jenv versions
   system
   oracle64-1.6.0.39
-* oracle64-1.7.0.11 <span class="token punctuation">(</span>set by /Users/hikage/.jenv/version<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+* oracle64-1.7.0.11 <span class="token punctuation">(</span>set by /Users/hikage/.jenv/version<span class="token punctuation">)</span></code></pre>
 <p>Configure global version</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv global oracle64-1.6.0.39<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ jenv global oracle64-1.6.0.39</code></pre>
 <p>Configure local version (per directory)</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv <span class="token builtin class-name">local</span> oracle64-1.6.0.39<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ jenv <span class="token builtin class-name">local</span> oracle64-1.6.0.39</code></pre>
 <p>Configure shell instance version</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ jenv shell oracle64-1.6.0.39<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ jenv shell oracle64-1.6.0.39</code></pre>
 
 
 <hr>
@@ -733,6 +736,9 @@ jenv <span class="token function">add</span> java_home<span aria-hidden="true" c
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

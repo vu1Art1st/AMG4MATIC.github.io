@@ -408,6 +408,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -438,13 +441,13 @@
 <li><p>根据管理员的提示，筛选端口37830,发现了外联的IP和异常hex字符串。<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210705162033.png" alt="20210705162033"></p>
 </li>
 <li><p>编写脚本与服务器进行通讯，获取响应字符串(这里需要做一下尝试知道需要把trailer和frame check sequence拼接起来)</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
  p <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">"39.105.136.152"</span><span class="token punctuation">,</span> <span class="token number">37830</span><span class="token punctuation">)</span>
  context<span class="token punctuation">.</span>log_level <span class="token operator">=</span> <span class="token string">"debug"</span>
  c <span class="token operator">=</span> <span class="token string">"21313221fdfcee965a21000000693359784e7051764f714c64497a426e"</span>
  p<span class="token punctuation">.</span>send<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
  <span class="token keyword">print</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
- p<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ p<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210705162318.png" alt="20210705162318"> </p>
 </li>
 <li><p>根据题目提示，要对返回的hex值进行解密，因此需要知道加密方式。查看异常请求的响应，发现一串很像base64编码的字符串，尝试解码，获取<code>TEA （300</code><br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210706090551.png" alt="20210706090551"></p>
@@ -505,8 +508,8 @@
 </ul>
 <h3 id="08智能卡"><a href="#08智能卡" class="headerlink" title="08智能卡"></a>08智能卡</h3><h4 id="题目描述-8"><a href="#题目描述-8" class="headerlink" title="题目描述"></a>题目描述</h4><p>小吕对一张已经过期的Mifare非接触智能卡进行修改，想进行延长智能卡的到期时间。小吕成功对数据解密并将数据dump出来，存为originalData。再将相关文件中的有关时间的数据进行修改并重新写入智能卡中。修改后本卡还是不能使用。小吕再次将卡内数据导出，存为modifyData。你能帮助小吕解决相关智能卡的使用吗？flag是文件的md5值。flag格式为:flag{}。</p>
 <h4 id="解题思路-8"><a href="#解题思路-8" class="headerlink" title="解题思路"></a>解题思路</h4><p>这题出现了非预期，官方直接把correct.dump白给了。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">md5 correct.dump
-MD5 <span class="token punctuation">(</span>correct.dump<span class="token punctuation">)</span> <span class="token operator">=</span> 526e683b4f9ccf4aa56e65fc3831929e<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">md5 correct.dump
+MD5 <span class="token punctuation">(</span>correct.dump<span class="token punctuation">)</span> <span class="token operator">=</span> 526e683b4f9ccf4aa56e65fc3831929e</code></pre>
 
 
 
@@ -771,6 +774,9 @@ MD5 <span class="token punctuation">(</span>correct.dump<span class="token punct
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

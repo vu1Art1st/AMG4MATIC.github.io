@@ -408,6 +408,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -766,7 +769,7 @@
 </ul>
 <h5 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h5><p>作为最普通的密码攻击手段，ARCHPR允许在范围选项卡中，选择暴力破解的字符集：</p>
 <p>其中”所有特殊符号”为：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">!</span>@<span class="token comment">#$%^&amp;*()_+-=&lt;>,./?[]&#123;&#125;~:;`'|"\</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token operator">!</span>@<span class="token comment">#$%^&amp;*()_+-=&lt;>,./?[]&#123;&#125;~:;`'|"\</span></code></pre>
 
 <p>此外，可以自定义字符集：通过勾选用户定义，然后点击右边的”自定义字符集”选项</p>
 <p>如你所见，在给定的字符集中，只囊括了ASCII可打印字符，如果 .zip 的密码是中文的话，那就必须选择”自定义字符集”，并且勾选转换为OEM编码；否则密码会”Not Found”</p>
@@ -784,7 +787,7 @@
 <li>数字 0 - 9</li>
 <li>特殊字符 !@#$ …<br>也就是说，暴力破解密码的顺序大致为：</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token string">"AAA"</span> -<span class="token operator">></span> <span class="token string">"AAB"</span> -<span class="token operator">></span> <span class="token string">"AAC"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AAZ"</span> -<span class="token operator">></span> <span class="token string">"AA "</span> -<span class="token operator">></span> <span class="token string">"AAa"</span> -<span class="token operator">></span> <span class="token string">"AAb"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AAz"</span> -<span class="token operator">></span> <span class="token string">"AA0"</span> -<span class="token operator">></span> <span class="token string">"AA1"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AA9"</span> -<span class="token operator">></span> <span class="token string">"AA!"</span> -<span class="token operator">></span> <span class="token string">"AA@"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token string">"AAA"</span> -<span class="token operator">></span> <span class="token string">"AAB"</span> -<span class="token operator">></span> <span class="token string">"AAC"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AAZ"</span> -<span class="token operator">></span> <span class="token string">"AA "</span> -<span class="token operator">></span> <span class="token string">"AAa"</span> -<span class="token operator">></span> <span class="token string">"AAb"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AAz"</span> -<span class="token operator">></span> <span class="token string">"AA0"</span> -<span class="token operator">></span> <span class="token string">"AA1"</span> -<span class="token operator">></span> <span class="token punctuation">..</span>. -<span class="token operator">></span> <span class="token string">"AA9"</span> -<span class="token operator">></span> <span class="token string">"AA!"</span> -<span class="token operator">></span> <span class="token string">"AA@"</span></code></pre>
 
 <p>上图的”开始于”有2个作用：</p>
 <p>当你知道密码长度为5，并且第一个字符为 k，你可以在”开始于”设置<code>kAAAA</code>，那么ARCHPR将跳过<code>AAAAA</code>到<code>kAAAA</code>的前一个的暴力破解，节省时间<br>如果破解密码的时间太长，ARCHPR会每隔5分钟自动保存密码（在自动保存选项卡中可以选择），如果某次暴力破解被迫中断，那么可以通过查看最后一次保存的密码，并设置”开始于”，直接从上次爆破的地方继续开始爆破<br>“结束于”的作用类似</p>
@@ -835,7 +838,7 @@
 <p>我们不去爆破压缩包的密码，而是直接去爆破源文件的内容(一般都是可见的字符串)，从而获取想要的信息。</p>
 <p>比如我们新建一个 <code>flag.txt</code>，其中内容为 <code>123</code>，使用密码 <code>!QAZXSW@#EDCVFR$</code> 去加密。</p>
 <p>!!! note<br>​    在爆破时我们所枚举的所有可能字符串的 <code>CRC32</code> 值是要与压缩源文件数据区中的 <code>CRC32</code> 值所对应</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
 
 <span class="token keyword">import</span> binascii
 <span class="token keyword">import</span> base64
@@ -860,10 +863,10 @@ crc <span class="token operator">=</span> <span class="token string">''</span><s
 <span class="token keyword">if</span> crc <span class="token keyword">in</span> crcdict<span class="token punctuation">:</span>
     <span class="token keyword">print</span> crcdict<span class="token punctuation">[</span>crc<span class="token punctuation">]</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span> <span class="token string">"FAILED!"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">print</span> <span class="token string">"FAILED!"</span></code></pre>
 
 <h5 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h5><p>根据每个压缩包内的文件大小可以推断使用 <code>CRC32</code> 攻击手法，获得每个压缩包内的内容后连在一起 <code>Base64</code> 解码后是一个加密的压缩包，爆破获得 <code>flag</code>。<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210905195800.png" alt="20210905195800"></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#coding:utf-8</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#coding:utf-8</span>
 <span class="token keyword">import</span> zipfile
 <span class="token keyword">import</span> string
 <span class="token keyword">import</span> binascii
@@ -893,7 +896,7 @@ dic <span class="token operator">=</span> string<span class="token punctuation">
 
 f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'out.txt'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span>
 CrackZip<span class="token punctuation">(</span><span class="token punctuation">)</span>
-f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210905201011.png" alt="20210905201011"></p>
 <h4 id="明文攻击"><a href="#明文攻击" class="headerlink" title="明文攻击"></a>明文攻击</h4><h5 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h5><ul>
 <li><p>.zip 传统加密算法本质上是<code>伪随机数流</code>和<code>明文</code>进行异或，产生这个伪随机流需要用到3个32 bits的key；<code>找到这3个key，就能解开加密的文件</code></p>
@@ -944,7 +947,7 @@ f<span class="token punctuation">.</span>close<span class="token punctuation">(<
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210906111208.png" alt="20210906111208"><br>我们将 <code>Desktop_decrypted.zip</code> 解压出来，查看 <code>answer</code> 目录下的 <code>key.txt</code> 即可。</p>
 <p>所以最终的flag为：**<code>flag&#123;7ip_Fi13_S0m3tim3s_s0_3a5y@&#125;</code>**</p>
 <h4 id="伪加密"><a href="#伪加密" class="headerlink" title="伪加密"></a>伪加密</h4><h5 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h5><p>在上文 <code>ZIP</code> 格式中的 <strong>核心目录区</strong> 中，我们强调了一个叫做通用位标记 <code>(General purpose bit flag)</code> 的 <code>2</code> 字节，不同比特位有着不同的含义。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Bit <span class="token number">0</span>: If set, indicates that the <span class="token function">file</span> is encrypted.
+<pre class="language-bash" data-language="bash"><code class="language-bash">Bit <span class="token number">0</span>: If set, indicates that the <span class="token function">file</span> is encrypted.
 
 <span class="token punctuation">(</span>For Method <span class="token number">6</span> - Imploding<span class="token punctuation">)</span>
 Bit <span class="token number">1</span>: If the compression method used was <span class="token builtin class-name">type</span> <span class="token number">6</span>,
@@ -957,7 +960,7 @@ Bit <span class="token number">6</span>: Strong encryption.  If this bit is set,
      <span class="token number">50</span> and you must also <span class="token builtin class-name">set</span> bit <span class="token number">0</span>.  If AES encryption
      is used, the version needed to extract value must
      be at least <span class="token number">51</span>.
-<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">..</span>.</code></pre>
 
 <p>修改伪加密的方法：</p>
 <ul>
@@ -1143,7 +1146,7 @@ Bit <span class="token number">6</span>: Strong encryption.  If this bit is set,
 <h3 id="主要攻击-1"><a href="#主要攻击-1" class="headerlink" title="主要攻击"></a>主要攻击</h3><h4 id="伪加密-1"><a href="#伪加密-1" class="headerlink" title="伪加密"></a>伪加密</h4><p>RAR 文件的伪加密在文件头中的位标记字段上，用 010 Editor 可以很清楚的看见这一位，修改这一位可以造成伪加密。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/6.png" alt="6"></p>
 <p>其余明文攻击等手法依旧同 ZIP 中介绍的一样。</p>
-<h2 id="7z"><a href="#7z" class="headerlink" title="7z"></a>7z</h2><h3 id="7z文件头"><a href="#7z文件头" class="headerlink" title="7z文件头"></a>7z文件头</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">37</span> 7A BC AF <span class="token number">27</span> 1C<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="7z"><a href="#7z" class="headerlink" title="7z"></a>7z</h2><h3 id="7z文件头"><a href="#7z文件头" class="headerlink" title="7z文件头"></a>7z文件头</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">37</span> 7A BC AF <span class="token number">27</span> 1C</code></pre>
 
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.2.0.txt">https://pkware.cachefly.net/webdocs/APPNOTE/APPNOTE-6.2.0.txt</a></li>
@@ -1354,19 +1357,19 @@ Bit <span class="token number">6</span>: Strong encryption.  If this bit is set,
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/linux/linuxvps-an-quan-pei-zhi/">
+                <a href="/computertips/ha-xi-hash-ji-suan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="LinuxVPS安全配置">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="哈希(hash)计算">
                         
-                        <span class="card-title">LinuxVPS安全配置</span>
+                        <span class="card-title">哈希(hash)计算</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            LinuxVPS安全配置
+                            hash计算是我们经常需要用到的命令，这里每个系统做个记录
                         
                     </div>
                     <div class="publish-info">
@@ -1377,8 +1380,8 @@ Bit <span class="token number">6</span>: Strong encryption.  If this bit is set,
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                            <a href="/categories/ComputerTips/" class="post-category">
+                                    ComputerTips
                                 </a>
                             
                             
@@ -1388,12 +1391,12 @@ Bit <span class="token number">6</span>: Strong encryption.  If this bit is set,
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/ComputerTips/">
+                        <span class="chip bg-color">ComputerTips</span>
                     </a>
                     
-                    <a href="/tags/ssh/">
-                        <span class="chip bg-color">ssh</span>
+                    <a href="/tags/Hash/">
+                        <span class="chip bg-color">Hash</span>
                     </a>
                     
                 </div>
@@ -1411,6 +1414,9 @@ Bit <span class="token number">6</span>: Strong encryption.  If this bit is set,
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->

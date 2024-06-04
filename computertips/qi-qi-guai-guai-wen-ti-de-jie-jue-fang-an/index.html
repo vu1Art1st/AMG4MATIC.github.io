@@ -404,6 +404,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -412,30 +415,30 @@
                 <blockquote>
 <p>在用命令行的时候总会冒出来各种莫名其妙的问题，这里做个合集记录一下，给有缘人解惑</p>
 </blockquote>
-<h2 id="Curl"><a href="#Curl" class="headerlink" title="Curl"></a>Curl</h2><h3 id="curl（35）："><a href="#curl（35）：" class="headerlink" title="curl（35）："></a>curl（35）：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">curl: <span class="token punctuation">(</span><span class="token number">35</span><span class="token punctuation">)</span> LibreSSL SSL_connect: SSL_ERROR_SYSCALL <span class="token keyword">in</span> connection to xxx:443<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Curl"><a href="#Curl" class="headerlink" title="Curl"></a>Curl</h2><h3 id="curl（35）："><a href="#curl（35）：" class="headerlink" title="curl（35）："></a>curl（35）：</h3><pre class="language-bash" data-language="bash"><code class="language-bash">curl: <span class="token punctuation">(</span><span class="token number">35</span><span class="token punctuation">)</span> LibreSSL SSL_connect: SSL_ERROR_SYSCALL <span class="token keyword">in</span> connection to xxx:443</code></pre>
 <h4 id="解决方案1："><a href="#解决方案1：" class="headerlink" title="解决方案1："></a>解决方案1：</h4><p>参考链接：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/48987512/ssl-connect-ssl-error-syscall-in-connection-to-github-com443">https://stackoverflow.com/questions/48987512/ssl-connect-ssl-error-syscall-in-connection-to-github-com443</a></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">networksetup <span class="token parameter variable">-setv6off</span> Wi-Fi
+<pre class="language-bash" data-language="bash"><code class="language-bash">networksetup <span class="token parameter variable">-setv6off</span> Wi-Fi
 <span class="token comment"># 还原</span>
-networksetup <span class="token parameter variable">-setv6automatic</span> Wi-Fi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+networksetup <span class="token parameter variable">-setv6automatic</span> Wi-Fi</code></pre>
 
-<h4 id="解决方案2"><a href="#解决方案2" class="headerlink" title="解决方案2:"></a>解决方案2:</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#mac自带的版本太旧了</span>
+<h4 id="解决方案2"><a href="#解决方案2" class="headerlink" title="解决方案2:"></a>解决方案2:</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#mac自带的版本太旧了</span>
 brew <span class="token function">install</span> <span class="token function">curl</span>
-<span class="token builtin class-name">echo</span> <span class="token string">'export PATH="/usr/local/opt/curl/bin:$PATH"'</span> <span class="token operator">>></span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token builtin class-name">echo</span> <span class="token string">'export PATH="/usr/local/opt/curl/bin:$PATH"'</span> <span class="token operator">>></span> ~/.zshrc</code></pre>
 
 
 
 <h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><h3 id="源提示404，解压失败"><a href="#源提示404，解压失败" class="headerlink" title="源提示404，解压失败:"></a>源提示404，解压失败:</h3><p>这个问题是出现在用cunkai脚本安装的homebrew出现的，在下载包的时候清华源返回404的错误，但是从官方源下载了压缩包，但是最终解压缩的时候出现了如下报错</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew tar: Error opening archive: Failed to <span class="token function">open</span> <span class="token string">'/Users/***/Library/Caches/Homebrew/downloads/873d0224aa49d2ed77a0755837c3a4fbad9c6409570447cd2694597032e41306--mpdecimal-2.5.1.big_sur.bottle.tar.gz'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash">brew tar: Error opening archive: Failed to <span class="token function">open</span> <span class="token string">'/Users/***/Library/Caches/Homebrew/downloads/873d0224aa49d2ed77a0755837c3a4fbad9c6409570447cd2694597032e41306--mpdecimal-2.5.1.big_sur.bottle.tar.gz'</span></code></pre>
 
 <h4 id="解决方案1"><a href="#解决方案1" class="headerlink" title="解决方案1:"></a>解决方案1:</h4><p>这里选择了直接重置源，理论上也可换源进行尝试，重置源的方法可以参考<a href="https://www.secgxx.com/macos/macos/">macOS的系统设置记录（一)</a></p>
 <h2 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h2><h3 id="提示不是私密连接，点击高级没有继续访问按钮提示"><a href="#提示不是私密连接，点击高级没有继续访问按钮提示" class="headerlink" title="提示不是私密连接，点击高级没有继续访问按钮提示"></a>提示不是私密连接，点击高级没有继续访问按钮提示</h3><p>访问https的网页，以前正常访问提示不是私密连接，可以点击高级，继续访问，但是最近突然没有继续访问的按钮了。</p>
 <h4 id="解决方案1-1"><a href="#解决方案1-1" class="headerlink" title="解决方案1"></a>解决方案1</h4><p>在chrome该页面上，直接键盘敲入这11个字符：<code>thisisunsafe</code></p>
 <h2 id="OneForAll"><a href="#OneForAll" class="headerlink" title="OneForAll"></a>OneForAll</h2><p>最近再做信息收集的时候遇到了OneForAll检测网络环境失败的情况，在大佬的提示下发现是位于<code>/common/utils.py</code>的第498行中，作者提供的接口都失效了。替换了接口以后就万事大吉。下面给出参考接口：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">check_net</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">check_net</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     urls <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'http://ip-api.com/json/'</span><span class="token punctuation">,</span> <span class="token string">'https://api.ip.sb/geoip'</span><span class="token punctuation">]</span>
     url <span class="token operator">=</span> random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>urls<span class="token punctuation">)</span>
     header <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">'User_Agent'</span><span class="token punctuation">:</span> <span class="token string">'curl'</span><span class="token punctuation">&#125;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
 
 <h2 id="MacBook"><a href="#MacBook" class="headerlink" title="MacBook"></a>MacBook</h2><h3 id="中英文输入法切换卡顿"><a href="#中英文输入法切换卡顿" class="headerlink" title="中英文输入法切换卡顿"></a>中英文输入法切换卡顿</h3><p>这个问题自从升级到BigSur11.1以后就在困扰这SECGXX君，只不过之前是一直时灵时不灵的，所以也就一直在凑合着，不过今天在写markdown的时候就一直切换不过来，十分烦躁于是准备彻底解决一下。</p>
 <p>一番搜索以后发现解决方法也是十分的简单。</p>
@@ -735,6 +738,9 @@ brew <span class="token function">install</span> <span class="token function">cu
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
