@@ -214,33 +214,6 @@
     
     
     <entry>
-      <title>哈希(hash)计算</title>
-      <link href="/computertips/ha-xi-hash-ji-suan/"/>
-      <url>/computertips/ha-xi-hash-ji-suan/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>hash计算是我们经常需要用到的命令，这里每个系统做个记录</p></blockquote><h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><pre class="language-bash" data-language="bash"><code class="language-bash">certutil <span class="token parameter variable">-hashfile</span> filename MD5certutil <span class="token parameter variable">-hashfile</span> filename SHA1certutil <span class="token parameter variable">-hashfile</span> filename SHA256</code></pre><p>Windows还以通过安装<code>Hashtab</code>之后直接通过右键查看属性获取hash值。</p><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ md5sum filename$ sha1sum filename$ sha256sum filename</code></pre><h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><h3 id="系统自带："><a href="#系统自带：" class="headerlink" title="系统自带："></a>系统自带：</h3><pre class="language-bash" data-language="bash"><code class="language-bash">md5 file_nameshasum <span class="token parameter variable">-a</span> <span class="token number">1</span>/256 file_name</code></pre><h3 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL"></a>OpenSSL</h3><pre class="language-bash" data-language="bash"><code class="language-bash">openssl md5 filenameopenssl sha1 filenameopenssl sha256 filename</code></pre><h2 id="查看一个字符串的hash值"><a href="#查看一个字符串的hash值" class="headerlink" title="查看一个字符串的hash值"></a>查看一个字符串的hash值</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token parameter variable">-n</span> <span class="token string">'string'</span> <span class="token operator">|</span> <span class="token builtin class-name">hash</span></code></pre><p>echo -n : 不打印换行符。(注意: echo -n 后面的-n参数必须加上, 这样算出的字符串的md5值才正确)</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> ComputerTips </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ComputerTips </tag>
-            
-            <tag> Hash </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>LinuxVPS安全配置</title>
       <link href="/linux/linuxvps-an-quan-pei-zhi/"/>
       <url>/linux/linuxvps-an-quan-pei-zhi/</url>
@@ -285,6 +258,33 @@
         <tags>
             
             <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>哈希(hash)计算</title>
+      <link href="/computertips/ha-xi-hash-ji-suan/"/>
+      <url>/computertips/ha-xi-hash-ji-suan/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>hash计算是我们经常需要用到的命令，这里每个系统做个记录</p></blockquote><h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><pre class="language-bash" data-language="bash"><code class="language-bash">certutil <span class="token parameter variable">-hashfile</span> filename MD5certutil <span class="token parameter variable">-hashfile</span> filename SHA1certutil <span class="token parameter variable">-hashfile</span> filename SHA256</code></pre><p>Windows还以通过安装<code>Hashtab</code>之后直接通过右键查看属性获取hash值。</p><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><pre class="language-bash" data-language="bash"><code class="language-bash">$ md5sum filename$ sha1sum filename$ sha256sum filename</code></pre><h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><h3 id="系统自带："><a href="#系统自带：" class="headerlink" title="系统自带："></a>系统自带：</h3><pre class="language-bash" data-language="bash"><code class="language-bash">md5 file_nameshasum <span class="token parameter variable">-a</span> <span class="token number">1</span>/256 file_name</code></pre><h3 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL"></a>OpenSSL</h3><pre class="language-bash" data-language="bash"><code class="language-bash">openssl md5 filenameopenssl sha1 filenameopenssl sha256 filename</code></pre><h2 id="查看一个字符串的hash值"><a href="#查看一个字符串的hash值" class="headerlink" title="查看一个字符串的hash值"></a>查看一个字符串的hash值</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token parameter variable">-n</span> <span class="token string">'string'</span> <span class="token operator">|</span> <span class="token builtin class-name">hash</span></code></pre><p>echo -n : 不打印换行符。(注意: echo -n 后面的-n参数必须加上, 这样算出的字符串的md5值才正确)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ComputerTips </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ComputerTips </tag>
+            
+            <tag> Hash </tag>
             
         </tags>
       
