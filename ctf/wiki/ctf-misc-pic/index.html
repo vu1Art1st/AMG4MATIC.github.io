@@ -1,0 +1,1606 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="ctf-misc-pic, ctf 折腾电脑 信息安全">
+    <meta name="description" content="ctf杂项中图片隐写的相关总结">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>ctf-misc-pic | SEC-GXX</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">SEC-GXX</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">SEC-GXX</div>
+        <div class="logo-desc">
+            
+            学习记录
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">ctf-misc-pic</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/ctf/">
+                                <span class="chip bg-color">ctf</span>
+                            </a>
+                        
+                            <a href="/tags/misc/">
+                                <span class="chip bg-color">misc</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-09-28
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文题目链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1SQcUY2jUt1NvX7VSvIyf9Q">https://pan.baidu.com/s/1SQcUY2jUt1NvX7VSvIyf9Q</a> 提取码: 9p2k </p>
+</blockquote>
+<h2 id="常见图片文件头"><a href="#常见图片文件头" class="headerlink" title="常见图片文件头"></a>常见图片文件头</h2><table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>文件头</th>
+<th>文件尾</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JPEG&#x2F;JPG</td>
+<td>FF D8</td>
+<td>FF D9</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>89 50 4E 47 0D 0A 1A 0A</td>
+<td>AE 42 60 82</td>
+</tr>
+<tr>
+<td>GIF</td>
+<td>47 49 46 38 39(37) 61</td>
+<td>00 3B</td>
+</tr>
+</tbody></table>
+<h2 id="元数据（Metadata）"><a href="#元数据（Metadata）" class="headerlink" title="元数据（Metadata）"></a>元数据（Metadata）</h2><blockquote>
+<p>元数据（Metadata），又称中介数据、中继数据，为描述数据的数据（Data about data），主要是描述数据属性（property）的信息，用来支持如指示存储位置、历史数据、资源查找、文件记录等功能。</p>
+</blockquote>
+<p>元数据中隐藏信息在比赛中是最基本的一种手法，通常用来隐藏一些关键的 <code>Hint</code> 信息或者是一些重要的如 <code>password</code> 等信息。</p>
+<p>这类元数据你可以 <code>右键 --&gt; 属性</code> 去查看,也可以通过 <code>strings</code> 命令去查看，一般来说，一些隐藏的信息（奇怪的字符串）常常出现在头部或者尾部。</p>
+<p>接下来介绍一个 <code>identify</code> 命令，这个命令是用来获取一个或多个图像文件的格式和特性。这个命令的获取是在安装了<code>Imagemagick</code>这个包以后获取的。</p>
+<p><code>-format</code> 用来指定显示的信息，灵活使用它的 <code>-format</code> 参数可以给解题带来不少方便。<a target="_blank" rel="noopener" href="https://www.imagemagick.org/script/escape.php">format各个参数具体意义</a></p>
+<h3 id="例题-Mysterious-GIF"><a href="#例题-Mysterious-GIF" class="headerlink" title="例题-Mysterious GIF"></a>例题-Mysterious GIF</h3><p><a target="_blank" rel="noopener" href="https://github.com/ctfs/write-ups-2017/tree/master/breakin-ctf-2017/misc/Mysterious-GIF">Break In 2017 - Mysterious GIF</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210909142346.png" alt="20210909142346"></p>
+<blockquote>
+<p>这里需要用binwalk -e 分离tmp.zip</p>
+</blockquote>
+<p>提取之后发现是一堆.enc文件，因此下一步就是要找enc文件解密需要的key，这里分别对GIF、enc文件、压缩包进行strings，在GiF中找到了一串16进制字符串</p>
+<p>这题的一个难点是发现并提取 GIF 中的元数据，首先 <code>strings</code> 是可以观察到异常点的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">   !!!&quot;&quot;&quot;###$$$%%%&amp;&amp;&amp;&#x27;&#x27;&#x27;((()))***+++,,,---...///000111222333444555666777888999:::;;;&lt;&lt;&lt;===&gt;&gt;&gt;???@@@AAABBBCCCDDDEEEFFFGGGHHHIIIJJJKKKLLLMMMNNNOOOPPPQQQRRRSSSTTTUUUVVVWWWXXXYYYZZZ[[[\\\]]]^^^___```aaabbbcccdddeeefffggghhhiiijjjkkklllmmmnnnooopppqqqrrrssstttuuuvvvwwwxxxyyyzzz&#123;&#123;&#123;|||&#125;&#125;&#125;~~~</span><br><span class="line">4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</span><br><span class="line">NETSCAPE2.0</span><br><span class="line">ImageMagick</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这里的一串16进制其实是藏在 GIF 的元数据区</p>
+<p>接下来就是提取，你可以选择 Python，但是利用 <code>identify</code> 显得更加便捷</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root in ~/Desktop/tmp λ identify -format &quot;%s %c \n&quot; Question.gif</span><br><span class="line">0 4d494945767749424144414e42676b71686b6947397730424151454641415343424b6b776767536c41674541416f4942415144644d4e624c3571565769435172</span><br><span class="line">1 5832773639712f377933536849507565707478664177525162524f72653330633655772f6f4b3877655a547834346d30414c6f75685634364b63514a6b687271</span><br><span class="line">...</span><br><span class="line">24 484b7735432b667741586c4649746d30396145565458772b787a4c4a623253723667415450574d35715661756278667362356d58482f77443969434c684a536f</span><br><span class="line">25 724b3052485a6b745062457335797444737142486435504646773d3d</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line">os.system(<span class="string">&#x27;identify -format &quot;%c \n&quot; Question.gif &gt; key&#x27;</span>)</span><br><span class="line"></span><br><span class="line">temp=<span class="built_in">open</span>(<span class="string">&#x27;key&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;key1&#x27;</span>, <span class="string">&#x27;wb+&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> temp:</span><br><span class="line">    i = i.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    i=<span class="built_in">int</span>(i,<span class="number">16</span>)</span><br><span class="line">    i=<span class="built_in">hex</span>(i)</span><br><span class="line">    i = binascii.unhexlify(i[<span class="number">2</span>:])</span><br><span class="line">   <span class="comment"># </span></span><br><span class="line">    i = i.decode(<span class="string">&#x27;utf-8&#x27;</span>) + <span class="string">&#x27;\n&#x27;</span></span><br><span class="line">    i = <span class="built_in">bytes</span>(i, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    f.write(i)</span><br><span class="line">    </span><br><span class="line">temp.close()</span><br><span class="line">f.close()</span><br><span class="line">os.system(<span class="string">&#x27;rm -f key&#x27;</span>)</span><br><span class="line">os.rename(<span class="string">&#x27;key1&#x27;</span>,<span class="string">&#x27;key&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这道题的下一个难点就是在做了十六进制解码以后，意识到这是一个rsakey</p>
+<p>意识到这个是个私钥以后就好办了，先解密一个partaa.enc看一下<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210910103938.png" alt="20210910103938"></p>
+<p>于是脚本搞定</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">dic = string.ascii_letters</span><br><span class="line">i=<span class="number">0</span></span><br><span class="line">i1=<span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(dic[:<span class="number">26</span>])</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> dic[:<span class="number">11</span>]:</span><br><span class="line">    <span class="comment"># file = &#x27;part&#x27;</span></span><br><span class="line">    <span class="comment"># file = file+str(n)</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> dic[:<span class="number">26</span>]:</span><br><span class="line">        file1=<span class="string">&#x27;&#x27;</span></span><br><span class="line">        file = <span class="string">&#x27;part&#x27;</span>+<span class="built_in">str</span>(n)</span><br><span class="line">        <span class="comment"># print(file)</span></span><br><span class="line">        file1 = file+<span class="built_in">str</span>(m)</span><br><span class="line">        file = file+<span class="built_in">str</span>(m)+<span class="string">&#x27;.enc&#x27;</span>        </span><br><span class="line">        <span class="built_in">print</span>(file,file1)</span><br><span class="line">        os.system(<span class="string">&#x27;openssl rsautl -decrypt -inkey key -in %s -out %s&#x27;</span> %(file ,file1))</span><br><span class="line">        file1 = file+<span class="built_in">str</span>(m)</span><br><span class="line">        os.system(<span class="string">&#x27;rm -f %s %s&#x27;</span> %(file,file1))</span><br><span class="line">os.system(<span class="string">&#x27;cat part* &gt; final&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>最终获取flag<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210910104238.png" alt="20210910104238"></p>
+<h2 id="像素值转化"><a href="#像素值转化" class="headerlink" title="像素值转化"></a>像素值转化</h2><h3 id="例题-神奇的二维码"><a href="#例题-神奇的二维码" class="headerlink" title="例题-神奇的二维码"></a>例题-神奇的二维码</h3><p>看看这个文件里的数据，你能想到什么？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">255,255,255,255,255...........</span><br></pre></td></tr></table></figure>
+
+<p>是一串 RGB 值，尝试着将他转化为图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">x = <span class="number">180</span> <span class="comment">#x坐标  对于文件里的RGB数据组进行分解</span></span><br><span class="line">y = <span class="number">180</span> <span class="comment">#y坐标  x*y = 行数</span></span><br><span class="line"></span><br><span class="line">rgb1 = [****] <span class="comment">#RGB数据</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">len</span>(rgb1)/<span class="number">3</span> <span class="comment">#计算有多少组RGB数据</span></span><br><span class="line">m=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0</span>,x):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(<span class="number">0</span>,y):</span><br><span class="line"></span><br><span class="line">        line = rgb1[(<span class="number">3</span>*m):(<span class="number">3</span>*(m+<span class="number">1</span>))]<span class="comment">#获取一行</span></span><br><span class="line">        m+=<span class="number">1</span></span><br><span class="line">        rgb = line</span><br><span class="line"></span><br><span class="line">        im.putpixel((i,j),(<span class="built_in">int</span>(rgb[<span class="number">0</span>]),<span class="built_in">int</span>(rgb[<span class="number">1</span>]),<span class="built_in">int</span>(rgb[<span class="number">2</span>])))<span class="comment">#rgb转化为像素</span></span><br><span class="line">im.show()</span><br><span class="line">im.save(<span class="string">&quot;flag.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后就是扫描获得一串字符串，base32-栅栏-凯撒获取flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210913151921.png" alt="20210913151921"></p>
+<p>flag{QrC0de_iS_in7eRst1ng-}</p>
+<h2 id="图片转像素"><a href="#图片转像素" class="headerlink" title="图片转像素"></a>图片转像素</h2><h3 id="例题-brainfun"><a href="#例题-brainfun" class="headerlink" title="例题-brainfun"></a>例题-brainfun</h3><p>神仙思路：</p>
+<ul>
+<li>首先确定没有其他的隐写存在</li>
+<li>这个图片的大小是512*512，但是可以匹配看成32*32的像素块</li>
+<li>RGB值全部都是16的倍数，也就是说，当以十六进制表示时，第二位永远是0</li>
+<li>此外RGB值中还包含了透明度的值，而这些透明度的值并没有很多种，而且都是可打印字符的ascii值，包括一些小写字母和+，-，.的值</li>
+<li>联想到题目brainfun，想到了brainfuck的编码，同时题目描述这是混乱的</li>
+</ul>
+<p>因此思路就是提取A值，同时以RGB的顺序排列，最后解brainfuck</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> pybrainfuck <span class="keyword">import</span> BrainFck</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Read image and get pixel data as list</span></span><br><span class="line">pixels = <span class="built_in">list</span>(Image.<span class="built_in">open</span>(<span class="string">&#x27;brainfun.png&#x27;</span>).getdata())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract just get the blocks. Fun fact: PIL&#x27;s resize with PIL.Image.NEAREST</span></span><br><span class="line"><span class="comment"># for nearest neighbor messes with the values, but mtPaint does it correctly.</span></span><br><span class="line">pixels = [pixels[r*<span class="number">512</span> + c]</span><br><span class="line">          <span class="keyword">for</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">512</span>, <span class="number">16</span>)</span><br><span class="line">          <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">512</span>, <span class="number">16</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sort the pixels by RGB value</span></span><br><span class="line">pixels.sort(key=<span class="keyword">lambda</span> p: (p[<span class="number">0</span>] &lt;&lt; <span class="number">8</span>) + (p[<span class="number">1</span>] &lt;&lt; <span class="number">4</span>) + p[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run the alpha values as Brainfuck</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&quot;</span>.join([<span class="built_in">chr</span>(p[<span class="number">3</span>]) <span class="keyword">for</span> p <span class="keyword">in</span> pixels]))</span><br><span class="line">BrainFck().run(<span class="string">&quot;&quot;</span>.join([<span class="built_in">chr</span>(p[<span class="number">3</span>]) <span class="keyword">for</span> p <span class="keyword">in</span> pixels]))</span><br></pre></td></tr></table></figure>
+
+
+<p>相关题目:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/ctfs/write-ups-2016/tree/master/csaw-ctf-2016-quals/forensics/brainfun-50">CSAW-2016-quals:Forensic&#x2F;Barinfun</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ctfs/write-ups-2017/tree/master/breakin-ctf-2017/misc/A-dance-partner">breakin-ctf-2017:A-dance-partner</a></li>
+</ul>
+<h2 id="PNG"><a href="#PNG" class="headerlink" title="PNG"></a>PNG</h2><h3 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h3><p>对于一个 PNG 文件来说，其文件头总是由位固定的字节来描述的，剩余的部分由 3 个以上的 PNG 的数据块（Chunk）按照特定的顺序组成。</p>
+<p>文件头 <code>89 50 4E 47 0D 0A 1A 0A</code> + 数据块 + 数据块 + 数据块……</p>
+<h3 id="数据块CHUNk"><a href="#数据块CHUNk" class="headerlink" title="数据块CHUNk"></a>数据块CHUNk</h3><p>PNG 定义了两种类型的数据块，一种是称为关键数据块（critical chunk），这是标准的数据块，另一种叫做辅助数据块（ancillary chunks），这是可选的数据块。关键数据块定义了 4 个标准数据块，每个 PNG 文件都必须包含它们，PNG 读写软件也都必须要支持这些数据块。</p>
+<table>
+<thead>
+<tr>
+<th>数据块符号</th>
+<th>数据块名称</th>
+<th>多数据块</th>
+<th>可选否</th>
+<th>位置限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IHDR</td>
+<td>文件头数据块</td>
+<td>否</td>
+<td>否</td>
+<td>第一块</td>
+</tr>
+<tr>
+<td>cHRM</td>
+<td>基色和白色点数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在PLTE和IDAT之前</td>
+</tr>
+<tr>
+<td>gAMA</td>
+<td>图像γ数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在PLTE和IDAT之前</td>
+</tr>
+<tr>
+<td>sBIT</td>
+<td>样本有效位数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在PLTE和IDAT之前</td>
+</tr>
+<tr>
+<td>PLTE</td>
+<td>调色板数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在IDAT之前</td>
+</tr>
+<tr>
+<td>bKGD</td>
+<td>背景颜色数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在PLTE之后IDAT之前</td>
+</tr>
+<tr>
+<td>hIST</td>
+<td>图像直方图数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在PLTE之后IDAT之前</td>
+</tr>
+<tr>
+<td>tRNS</td>
+<td>图像透明数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在PLTE之后IDAT之前</td>
+</tr>
+<tr>
+<td>oFFs</td>
+<td>（专用公共数据块）</td>
+<td>否</td>
+<td>是</td>
+<td>在IDAT之前</td>
+</tr>
+<tr>
+<td>pHYs</td>
+<td>物理像素尺寸数据块</td>
+<td>否</td>
+<td>是</td>
+<td>在IDAT之前</td>
+</tr>
+<tr>
+<td>sCAL</td>
+<td>（专用公共数据块）</td>
+<td>否</td>
+<td>是</td>
+<td>在IDAT之前</td>
+</tr>
+<tr>
+<td>IDAT</td>
+<td>图像数据块</td>
+<td>是</td>
+<td>否</td>
+<td>与其他IDAT连续</td>
+</tr>
+<tr>
+<td>tIME</td>
+<td>图像最后修改时间数据块</td>
+<td>否</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>tEXt</td>
+<td>文本信息数据块</td>
+<td>是</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>zTXt</td>
+<td>压缩文本数据块</td>
+<td>是</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>fRAc</td>
+<td>（专用公共数据块）</td>
+<td>是</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>gIFg</td>
+<td>（专用公共数据块）</td>
+<td>是</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>gIFt</td>
+<td>（专用公共数据块）</td>
+<td>是</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>gIFx</td>
+<td>（专用公共数据块）</td>
+<td>是</td>
+<td>是</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td>IEND</td>
+<td>图像结束数据</td>
+<td>否</td>
+<td>否</td>
+<td>最后一个数据块</td>
+</tr>
+</tbody></table>
+<p>对于每个数据块都有着统一的数据结构，每个数据块由 4 个部分组成</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>字节数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Length（长度）</td>
+<td>4字节</td>
+<td>指定数据块中数据域的长度，其长度不超过（231－1）字节</td>
+</tr>
+<tr>
+<td>Chunk Type Code（数据块类型码）</td>
+<td>4字节</td>
+<td>数据块类型码由 ASCII 字母（A - Z 和 a - z）组成</td>
+</tr>
+<tr>
+<td>Chunk Data（数据块数据）</td>
+<td>可变长度</td>
+<td>存储按照 Chunk Type Code 指定的数据</td>
+</tr>
+<tr>
+<td>CRC（循环冗余检测）</td>
+<td>4字节</td>
+<td>存储用来检测是否有错误的循环冗余码</td>
+</tr>
+</tbody></table>
+<p>CRC（Cyclic Redundancy Check）域中的值是对 Chunk Type Code 域和 Chunk Data 域中的数据进行计算得到的。</p>
+<h3 id="IHDR"><a href="#IHDR" class="headerlink" title="IHDR"></a>IHDR</h3><p>文件头数据块 IHDR（Header Chunk）：它包含有 PNG 文件中存储的图像数据的基本信息，由 13 字节组成，并要作为第一个数据块出现在 PNG 数据流中，而且一个 PNG 数据流中只能有一个文件头数据块</p>
+<p>其中我们关注的是前8字节的内容</p>
+<table>
+<thead>
+<tr>
+<th>域的名称</th>
+<th>字节数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Width</td>
+<td>4 bytes</td>
+<td>图像宽度，以像素为单位</td>
+</tr>
+<tr>
+<td>Height</td>
+<td>4 bytes</td>
+<td>图像高度，以像素为单位</td>
+</tr>
+</tbody></table>
+<p>我们经常会去更改一张图片的高度或者宽度使得一张图片显示不完整从而达到隐藏信息的目的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/pngihdr.png" alt="pngihdr"></p>
+<p>这里可以发现在 Kali 中是打不开这张图片的，提示 <code>IHDR CRC error</code>，而 Windows 10 自带的图片查看器能够打开，就提醒了我们 IHDR 块被人为的篡改过了，从而尝试修改图片的高度或者宽度发现隐藏的字符串。</p>
+<p>对于png的IHDR部分的隐写，有如下的工具和脚本，可以解决大部分问题</p>
+<ul>
+<li>PCRT(还不错)：自动修复图片</li>
+<li>pngcheck（配合脚本使用）：自动检查宽高与crc的匹配关系</li>
+<li>magnetos（强烈推荐）: 一个强大的自动化misc工具<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/restran/magnetos.git">https://github.com/restran/magnetos.git</a></li>
+</ul>
+</li>
+<li>pngcalculate：根据CRC校验和计算图片的宽高</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">misc = <span class="built_in">open</span>(<span class="string">&quot;flag.png&quot;</span>,<span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1024</span>):</span><br><span class="line">    data = misc[<span class="number">12</span>:<span class="number">16</span>] + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>,i)+ misc[<span class="number">20</span>:<span class="number">29</span>]</span><br><span class="line">    crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">    <span class="keyword">if</span> crc32 == <span class="number">0x932f8a6b</span>:</span><br><span class="line">        <span class="built_in">print</span> i</span><br></pre></td></tr></table></figure>
+
+<h4 id="例题-evalheight"><a href="#例题-evalheight" class="headerlink" title="例题-evalheight"></a>例题-evalheight</h4><p>根据题目名称肯定是修改高度了,这里展示一下多种工具的使用.<br>magnetos：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">what_steg -f Evalheight.png</span><br><span class="line">...</span><br><span class="line">[*] PNG图片宽高CRC32校验失败，文件宽高被修改过</span><br><span class="line">[*] 尝试爆破图片高度</span><br><span class="line">[*] 找到正确的图片高度: 350</span><br><span class="line">[*] 保存修正高度后的文件: fix_height.png</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927140005.png" alt="20210927140005"></p>
+<p>pngcheck&amp;pngcalculate</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pngcheck -p Evalheight.png</span><br><span class="line">File: Evalheight.png (92446 bytes)</span><br><span class="line">Evalheight.png  CRC error <span class="keyword">in</span> chunk IHDR (computed ca422c59, expected 52056cd4)</span><br><span class="line">ERROR: Evalheight.png</span><br><span class="line"></span><br><span class="line">python3 pngcal.py</span><br><span class="line">430 350</span><br><span class="line">hex: 0x1ae 0x15e</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后在010editor里面手动修改即可</p>
+<h4 id="例题-realme"><a href="#例题-realme" class="headerlink" title="例题-realme"></a>例题-realme</h4><p>打开题目发现文件头是损坏的<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927230737.png" alt="20210927230737"></p>
+<p>修复了之后发现文件的宽高也与crc的校验和不匹配，因此计算真实的宽、高</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通过pngcal计算出宽高的值，然后利用010editor修改获取flag</span></span><br><span class="line">09 760</span><br><span class="line">hex: 0x2c5 0x2f8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927234257.png" alt="20210927234257"></p>
+<h3 id="PLTE"><a href="#PLTE" class="headerlink" title="PLTE"></a>PLTE</h3><p>调色板数据块 PLTE（palette chunk）：它包含有与索引彩色图像（indexed-color image）相关的彩色变换数据，它仅与索引彩色图像有关，而且要放在图像数据块（image data<br>chunk）之前。真彩色的 PNG 数据流也可以有调色板数据块，目的是便于非真彩色显示程序用它来量化图像数据，从而显示该图像。</p>
+<h3 id="IDAT"><a href="#IDAT" class="headerlink" title="IDAT"></a>IDAT</h3><p>图像数据块 IDAT（image data chunk）：它存储实际的数据，在数据流中可包含多个连续顺序的图像数据块。</p>
+<ul>
+<li>储存图像像数数据</li>
+<li>在数据流中可包含多个连续顺序的图像数据块</li>
+<li>采用 LZ77 算法的派生算法进行压缩</li>
+<li>可以用 zlib 解压缩</li>
+</ul>
+<p>值得注意的是，IDAT 块只有当上一个块充满时，才会继续一个新的块。</p>
+<p>用 <code>pngcheck</code> 去查看此 PNG 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">λ .\pngcheck.exe -v sctf.png</span><br><span class="line">File: sctf.png (1421461 bytes)</span><br><span class="line">  chunk IHDR at offset 0x0000c, length 13</span><br><span class="line">    1000 x 562 image, 32-bit RGB+alpha, non-interlaced</span><br><span class="line">  chunk sRGB at offset 0x00025, length 1</span><br><span class="line">    rendering intent = perceptual</span><br><span class="line">  chunk gAMA at offset 0x00032, length 4: 0.45455</span><br><span class="line">  chunk pHYs at offset 0x00042, length 9: 3780x3780 pixels/meter (96 dpi)</span><br><span class="line">  chunk IDAT at offset 0x00057, length 65445</span><br><span class="line">    zlib: deflated, 32K window, fast compression</span><br><span class="line">  chunk IDAT at offset 0x10008, length 65524</span><br><span class="line">...</span><br><span class="line">  chunk IDAT at offset 0x150008, length 45027</span><br><span class="line">  chunk IDAT at offset 0x15aff7, length 138</span><br><span class="line">  chunk IEND at offset 0x15b08d, length 0</span><br><span class="line">No errors detected in sctf.png (28 chunks, 36.8% compression).</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，正常的块的 length 是在 65524 的时候就满了，而倒数第二个 IDAT 块长度是 45027，最后一个长度是 138，很明显最后一个 IDAT 块是有问题的，因为他本来应该并入到倒数第二个未满的块里.</p>
+<p>利用 <code>python zlib</code> 解压多余 IDAT 块的内容，此时注意剔除 <strong>长度、数据块类型及末尾的CRC校验值</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line">IDAT = <span class="string">&quot;789...667&quot;</span>.decode(<span class="string">&#x27;hex&#x27;</span>)</span><br><span class="line">result = binascii.hexlify(zlib.decompress(IDAT))</span><br><span class="line"><span class="built_in">print</span> result</span><br></pre></td></tr></table></figure>
+
+<h3 id="IEND"><a href="#IEND" class="headerlink" title="IEND"></a>IEND</h3><p>图像结束数据 IEND（image trailer chunk）：它用来标记 PNG 文件或者数据流已经结束，并且必须要放在文件的尾部。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 00 00 00 49 45 4E 44 AE 42 60 82</span><br></pre></td></tr></table></figure>
+
+<p>IEND 数据块的长度总是 <code>00 00 00 00</code>，数据标识总是 IEND <code>49 45 4E 44</code>，因此，CRC 码也总是 <code>AE 42 60 82</code>。</p>
+<p>这里是可以隐藏数据的，解法也很简单，使用工具、010editor等都可以获取。</p>
+<h4 id="例题-hidden"><a href="#例题-hidden" class="headerlink" title="例题-hidden"></a>例题-hidden</h4><p>使用PCRT直接获取隐藏数据<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210928093447.png" alt="20210928093447"></p>
+<h4 id="例题-hiddenplus"><a href="#例题-hiddenplus" class="headerlink" title="例题-hiddenplus"></a>例题-hiddenplus</h4><p>使用PCRT发现提示隐藏着PNG图片，分离图片得flag<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210928093734.png" alt="20210928093734"></p>
+<h3 id="其余辅助数据块"><a href="#其余辅助数据块" class="headerlink" title="其余辅助数据块"></a>其余辅助数据块</h3><ul>
+<li>背景颜色数据块 bKGD（background color）</li>
+<li>基色和白色度数据块 cHRM（primary chromaticities and white point），所谓白色度是指当 <code>R＝G＝B＝最大值</code> 时在显示器上产生的白色度</li>
+<li>图像 γ 数据块 gAMA（image gamma）</li>
+<li>图像直方图数据块 hIST（image histogram）</li>
+<li>物理像素尺寸数据块 pHYs（physical pixel dimensions）</li>
+<li>样本有效位数据块 sBIT（significant bits）</li>
+<li>文本信息数据块 tEXt（textual data）</li>
+<li>图像最后修改时间数据块 tIME （image last-modification time）</li>
+<li>图像透明数据块 tRNS （transparency）</li>
+<li>压缩文本数据块 zTXt （compressed textual data）</li>
+</ul>
+<h2 id="LSB"><a href="#LSB" class="headerlink" title="LSB"></a>LSB</h2><p>LSB 全称 Least Significant Bit，最低有效位。PNG 文件中的图像像数一般是由 RGB 三原色（红绿蓝）组成，每一种颜色占用 8 位，取值范围为 <code>0x00</code> 至 <code>0xFF</code>，即有 256 种颜色，一共包含了 256 的 3 次方的颜色，即 16777216 种颜色。</p>
+<p>而人类的眼睛可以区分约1000万种不同的颜色，意味着人类的眼睛无法区分余下的颜色大约有6777216种。</p>
+<p>LSB 隐写就是修改 RGB 颜色分量的最低二进制位（LSB），每个颜色会有 8 bit，LSB 隐写就是修改了像数中的最低的 1 bit，而人类的眼睛不会注意到这前后的变化，每个像素可以携带 3 比特的信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/lsb.jpg" alt="lsb"></p>
+<p>如果是要寻找这种 LSB 隐藏痕迹的话，有一个工具 <a target="_blank" rel="noopener" href="http://www.caesum.com/handbook/Stegsolve.jar">Stegsolve</a> 是个神器，可以来辅助我们进行分析。</p>
+<p>LSB 的信息借助于 Stegsolve 查看各个通道时一定要细心捕捉异常点，抓住 LSB 隐写的蛛丝马迹。</p>
+<h3 id="例题-lshhiddenplus1-lshhiddenplus"><a href="#例题-lshhiddenplus1-lshhiddenplus" class="headerlink" title="例题-lshhiddenplus1&amp;lshhiddenplus"></a>例题-lshhiddenplus1&amp;lshhiddenplus</h3><p>使用magnetos进行分析，在输出结果里发现这么一个压缩包<br>解压之后发现是一个elf文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file 1</span><br><span class="line">1: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 2.6.24, BuildID[sha1]=8df45089fa39fec83423ec37a944e81065d16bee, not stripped</span><br></pre></td></tr></table></figure>
+<p>运行获取flag</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Desktop] <span class="built_in">chmod</span> +x 1                                                        </span><br><span class="line">[Desktop] ./1                                                               </span><br><span class="line">hctf&#123;dd0gf4c3tok3yb0ard4g41n~~~&#125;<span class="comment">#  </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>另一种方法是借助 <code>Stegsolve--&gt;Analyse--&gt;Data Extract</code> 可以指定通道进行提取。</p>
+<p>可以发现 <code>zip</code> 头，用 <code>save bin</code> 保存为压缩包后，打开运行其中的 ELF 文件就可以得到最后的 flag。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927164819.png" alt="20210927164819"></p>
+<blockquote>
+<p>更多关于 LSB 的研究可以看 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23890677">这里</a>。</p>
+</blockquote>
+<h3 id="例题-lsbhidden"><a href="#例题-lsbhidden" class="headerlink" title="例题-lsbhidden"></a>例题-lsbhidden</h3><p>通过下方的按钮可以观察每个通道的信息，例如查看 R 通道的最低位第 8 位平面的信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210927161224.png" alt="20210927161224"></p>
+<h2 id="JPG"><a href="#JPG" class="headerlink" title="JPG"></a>JPG</h2><h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><ul>
+<li>JPEG 是有损压缩格式，将像素信息用 JPEG 保存成文件再读取出来，其中某些像素值会有少许变化。在保存时有个质量参数可在 0 至 100 之间选择，参数越大图片就越保真，但图片的体积也就越大。一般情况下选择 70 或 80 就足够了</li>
+<li>JPEG 没有透明度信息</li>
+</ul>
+<p>JPG 基本数据结构为两大类型：「段」和经过压缩编码的图像数据。</p>
+<table>
+<thead>
+<tr>
+<th>名 称</th>
+<th>字节数</th>
+<th>数据</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>段 标识</td>
+<td>1</td>
+<td>FF</td>
+<td>每个新段的开始标识</td>
+</tr>
+<tr>
+<td>段类型</td>
+<td>1</td>
+<td></td>
+<td>类型编码（称作标记码）</td>
+</tr>
+<tr>
+<td>段长 度</td>
+<td>2</td>
+<td></td>
+<td>包括段内容和段长度本身,不包括段标识和段类型</td>
+</tr>
+<tr>
+<td>段内容</td>
+<td>2</td>
+<td></td>
+<td>≤65533字节</td>
+</tr>
+</tbody></table>
+<ul>
+<li>有些段没有长度描述也没有内容，只有段标识和段类型。文件头和文件尾均属于这种段。</li>
+<li>段与段之间无论有多少 <code>FF</code> 都是合法的，这些 <code>FF</code> 称为「填充字节」，必须被忽略掉。</li>
+</ul>
+<p>一些常见的段类型<br><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/jpgformat.png" alt="jpgformat"></p>
+<p><code>0xffd8</code> 和 <code>0xffd9</code>为 JPG 文件的开始结束的标志。</p>
+<h2 id="隐写软件"><a href="#隐写软件" class="headerlink" title="隐写软件"></a>隐写软件</h2><h3 id="Stegdetect"><a href="#Stegdetect" class="headerlink" title="Stegdetect"></a><a target="_blank" rel="noopener" href="https://github.com/redNixon/stegdetect">Stegdetect</a></h3><p>通过统计分析技术评估 JPEG 文件的 DCT 频率系数的隐写工具, 可以检测到通过 JSteg、JPHide、OutGuess、Invisible<br>Secrets、F5、appendX 和 Camouflage 等这些隐写工具隐藏的信息，并且还具有基于字典暴力破解密码方法提取通过 Jphide、outguess 和 jsteg-shell 方式嵌入的隐藏信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-q 仅显示可能包含隐藏内容的图像。</span><br><span class="line">-n 启用检查JPEG文件头功能，以降低误报率。如果启用，所有带有批注区域的文件将被视为没有被嵌入信息。如果JPEG文件的JFIF标识符中的版本号不是1.1，则禁用OutGuess检测。</span><br><span class="line">-s 修改检测算法的敏感度，该值的默认值为1。检测结果的匹配度与检测算法的敏感度成正比，算法敏感度的值越大，检测出的可疑文件包含敏感信息的可能性越大。</span><br><span class="line">-d 打印带行号的调试信息。</span><br><span class="line">-t 设置要检测哪些隐写工具（默认检测jopi），可设置的选项如下：</span><br><span class="line">j 检测图像中的信息是否是用jsteg嵌入的。</span><br><span class="line">o 检测图像中的信息是否是用outguess嵌入的。</span><br><span class="line">p 检测图像中的信息是否是用jphide嵌入的。</span><br><span class="line">i 检测图像中的信息是否是用invisible secrets嵌入的。</span><br></pre></td></tr></table></figure>
+
+<h3 id="JPHS"><a href="#JPHS" class="headerlink" title="JPHS"></a><a target="_blank" rel="noopener" href="http://linux01.gwdg.de/~alatham/stego.html">JPHS</a></h3><p>JPEG 图像的信息隐藏软件 JPHS，它是由 Allan Latham 开发设计实现在 Windows 和 Linux 系统平台针对有损压缩 JPEG 文件进行信息加密隐藏和探测提取的工具。软件里面主要包含了两个程序 JPHIDE和 JPSEEK。JPHIDE 程序主要是实现将信息文件加密隐藏到 JPEG 图像功能，而 JPSEEK 程序主要实现从用 JPHIDE 程序加密隐藏得到的 JPEG 图像探测提取信息文件，Windows 版本的 JPHS 里的 JPHSWIN 程序具有图形化操作界面且具备 JPHIDE 和 JPSEEK 的功能。</p>
+<h3 id="SilentEye"><a href="#SilentEye" class="headerlink" title="SilentEye"></a><a target="_blank" rel="noopener" href="http://silenteye.v1kings.io/">SilentEye</a></h3><blockquote>
+<p>SilentEye is a cross-platform application design for an easy use of steganography, in this case hiding messages into pictures or sounds. It provides a pretty nice interface and an easy integration of new steganography algorithm and cryptography process by using a plug-ins system.</p>
+</blockquote>
+<h2 id="GIF"><a href="#GIF" class="headerlink" title="GIF"></a>GIF</h2><h2 id="文件结构-1"><a href="#文件结构-1" class="headerlink" title="文件结构"></a>文件结构</h2><p>一个GIF文件的结构可分为</p>
+<ul>
+<li>文件头（File Header）<ul>
+<li>GIF 文件署名（Signature）</li>
+<li>版本号（Version）</li>
+</ul>
+</li>
+<li>GIF 数据流（GIF Data Stream）<ul>
+<li>控制标识符</li>
+<li>图象块（Image Block）</li>
+<li>其他的一些扩展块</li>
+</ul>
+</li>
+<li>文件终结器（Trailer）</li>
+</ul>
+<p>下表显示了一个 GIF 文件的组成结构：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/gif.png" alt="gif"></p>
+<p>中间的那个大块可以被重复任意次</p>
+<h3 id="文件头"><a href="#文件头" class="headerlink" title="文件头"></a>文件头</h3><p>GIF 署名（Signature）和版本号（Version）。GIF 署名用来确认一个文件是否是 GIF 格式的文件，这一部分由三个字符组成：<code>GIF</code>；文件版本号也是由三个字节组成，可以为 <code>87a</code> 或 <code>89a</code>。</p>
+<h3 id="逻辑屏幕标识符（Logical-Screen-Descriptor）"><a href="#逻辑屏幕标识符（Logical-Screen-Descriptor）" class="headerlink" title="逻辑屏幕标识符（Logical Screen Descriptor）"></a>逻辑屏幕标识符（Logical Screen Descriptor）</h3><p>Logical Screen Descriptor（逻辑屏幕描述符）紧跟在 header 后面。这个块告诉 decoder（解码器）图片需要占用的空间。它的大小固定为 7 个字节，以 canvas width（画布宽度）和 canvas height（画布高度）开始。</p>
+<h3 id="全局颜色列表（Global-Color-Table）"><a href="#全局颜色列表（Global-Color-Table）" class="headerlink" title="全局颜色列表（Global Color Table）"></a>全局颜色列表（Global Color Table）</h3><p>GIF格式可以拥有global color table，或用于针对每个子图片集，提供local color table。每个color<br>table由一个RGB（就像通常我们见到的（255，0，0）红色 那种）列表组成。</p>
+<h3 id="图像标识符（Image-Descriptor）"><a href="#图像标识符（Image-Descriptor）" class="headerlink" title="图像标识符（Image Descriptor）"></a>图像标识符（Image Descriptor）</h3><p>一个 GIF 文件一般包含多个图片。之前的图片渲染模式一般是将多个图片绘制到一个大的（virtual<br>canvas）虚拟画布上，而现在一般将这些图片集用于实现动画。</p>
+<p>每个 image 都以一个 image descriptor block（图像描述块）作为开头，这个块固定为 10 字节。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/imagesdescription.png" alt="imagesdescription"></p>
+<h3 id="图像数据（Image-Data）"><a href="#图像数据（Image-Data）" class="headerlink" title="图像数据（Image Data）"></a>图像数据（Image Data）</h3><p>终于到了图片数据实际存储的地方。Image Data是由一系列的输出编码（output codes）构成，它们告诉decoder（解码器）需要绘制在画布上的每个颜色信息。这些编码以字节码的形式组织在这个块中。</p>
+<h3 id="文件终结器（Trailer）"><a href="#文件终结器（Trailer）" class="headerlink" title="文件终结器（Trailer）"></a>文件终结器（Trailer）</h3><p>该块为一个单字段块，用来指示该数据流的结束。取固定值0x3b.</p>
+<p>更多参见 <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/df52f1511cf8">gif 格式图片详细解析</a></p>
+<h2 id="空间轴"><a href="#空间轴" class="headerlink" title="空间轴"></a>空间轴</h2><p>由于GIF的动态特性，由一帧帧的图片构成，所以每一帧的图片，多帧图片间的结合，都成了隐藏信息的一种载体。</p>
+<p>对于需要分离的GIF文件,可以使用<code>convert</code>命令将其每一帧分割开来</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">convert cake.gif cake.png</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">cake-0.png cake-1.png cake-2.png cake-3.png cake.gif</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题-cake"><a href="#例题-cake" class="headerlink" title="例题-cake"></a>例题-cake</h3><blockquote>
+<p>WDCTF-2017:3-2</p>
+</blockquote>
+<p>打开gif后，思路很清晰，分离每一帧图片后，将起合并得到完整的二维码即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/20210928103111.png" alt="20210928103111"></p>
+<p>扫码后得到一串16进制字符串</p>
+<p><code>03f30d0ab8c1aa5....74080006030908</code></p>
+<p>开头<code>03f3</code>为<code>pyc</code>文件的头，恢复为<code>python</code>脚本后直接运行得到flag</p>
+<p>反编译网站：<a target="_blank" rel="noopener" href="https://tool.lu/pyc/">https://tool.lu/pyc/</a></p>
+<h2 id="时间轴"><a href="#时间轴" class="headerlink" title="时间轴"></a>时间轴</h2><p>GIF文件每一帧间的时间间隔也可以作为信息隐藏的载体。</p>
+<p>例如在当时在XMan选拔赛出的一题</p>
+<h3 id="例题-XMAN-2017-100-gif"><a href="#例题-XMAN-2017-100-gif" class="headerlink" title="例题-XMAN-2017:100.gif"></a>例题-XMAN-2017:100.gif</h3><p>打开发现gif文件损坏，用010editor打开，发现缺少了文件头</p>
+<p>通过<code>identify</code>命令清晰的打印出每一帧的时间间隔</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">identify -format <span class="string">&quot;%s %T \n&quot;</span> 100.gif</span></span><br><span class="line">0 66</span><br><span class="line">1 66</span><br><span class="line">2 20</span><br><span class="line">3 10</span><br><span class="line">4 20</span><br><span class="line">5 10</span><br><span class="line">6 10</span><br><span class="line">7 20</span><br><span class="line">8 20</span><br><span class="line">9 20</span><br><span class="line">10 20</span><br><span class="line">11 10</span><br><span class="line">12 20</span><br><span class="line">13 20</span><br><span class="line">14 10</span><br><span class="line">15 10</span><br></pre></td></tr></table></figure>
+
+<p>推断 <code>20 &amp; 10</code>  分别代表 <code>0 &amp; 1</code>，提取每一帧间隔并进行转化。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> flag|<span class="built_in">cut</span> -d <span class="string">&#x27; &#x27;</span> -f 2|<span class="built_in">tr</span> -d <span class="string">&#x27;66&#x27;</span>|<span class="built_in">tr</span> -d <span class="string">&#x27;\n&#x27;</span>|<span class="built_in">tr</span> -d <span class="string">&#x27;0&#x27;</span>|<span class="built_in">tr</span> <span class="string">&#x27;2&#x27;</span> <span class="string">&#x27;0&#x27;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看flag文件，以空格为分隔符，显示第二部分，删除66，删除换行，删除0，把2转换为0</span></span><br><span class="line"><span class="meta prompt_">0101100001001101010000010100111001111011001110010011011000110101001101110011010101100010011001010110010101100100001101000110010001100101011000010011000100111000011001000110010101100100001101000011011100110011001101010011011000110100001100110110000101100101011000110110011001100001001100110011010101111101#</span></span><br></pre></td></tr></table></figure>
+
+<p>最后转 ASCII 码得到 flag。</p>
+<h2 id="隐写软件-1"><a href="#隐写软件-1" class="headerlink" title="隐写软件"></a>隐写软件</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/matthewgao/F5-steganography">F5-steganography</a></li>
+</ul>
+<h2 id="条形码"><a href="#条形码" class="headerlink" title="条形码"></a>条形码</h2><ul>
+<li>宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符</li>
+<li>国际标准</li>
+<li>EAN-13 商品标准，13 位数字</li>
+<li>Code-39：39 字符</li>
+<li>Code-128：128 字符</li>
+<li><a target="_blank" rel="noopener" href="https://online-barcode-reader.inliteresearch.com/">条形码在线识别</a></li>
+</ul>
+<h2 id="二维码"><a href="#二维码" class="headerlink" title="二维码"></a>二维码</h2><ul>
+<li><p>用某种特定几何图形按一定规律在平面分步的黑白相间的图形记录数据符号信息</p>
+</li>
+<li><p>堆叠式 &#x2F; 行排式二维码：Code 16 k、Code 49、PDF417</p>
+</li>
+<li><p>矩阵式二维码：QR CODE</p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/![](.figureqr1.jpg).jpg" alt="![](.figureqr1.jpg)"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/AMG4MATIC/PicGo/img/![](.figureqr2.jpg).jpg" alt="![](.figureqr2.jpg)"></p>
+</li>
+</ul>
+<ul>
+<li>参考链接：<a target="_blank" rel="noopener" href="https://ctf-wiki.org/misc/picture/introduction/">https://ctf-wiki.org/misc/picture/introduction/</a></li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Secgxx</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://www.secgxx.com/ctf/wiki/ctf-misc-pic/">http://www.secgxx.com/ctf/wiki/ctf-misc-pic/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Secgxx</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/ctf/">
+                                    <span class="chip bg-color">ctf</span>
+                                </a>
+                            
+                                <a href="/tags/misc/">
+                                    <span class="chip bg-color">misc</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/ctf/wiki/ctf-misc-video/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="ctf-misc-video">
+                        
+                        <span class="card-title">ctf-misc-video</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ctf杂项中音视频隐写的相关总结
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ctf/">
+                        <span class="chip bg-color">ctf</span>
+                    </a>
+                    
+                    <a href="/tags/misc/">
+                        <span class="chip bg-color">misc</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/ctf/competition/2021longjiancup/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="2021年陇剑杯线上赛">
+                        
+                        <span class="card-title">2021年陇剑杯线上赛</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2021年陇剑杯线上赛题目复现
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ctf/">
+                        <span class="chip bg-color">ctf</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">Secgxx</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
